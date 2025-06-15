@@ -1,8 +1,15 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
 Repository voor DDD de beste groep
-to run environment, run:
+
+The following installation guide is for Windows.
+
+Step 1: install conda from the link below.
+https://www.anaconda.com/download
+Step 2: Install the environment. run the command:
 # conda env create -f environment.yaml
-to install dependencies, rin
+use the command below if to enter the environment:
+# conda activate advice
+Step 3: in the newly created environment, run the following command to install the dependencies:
 # pip install -r requirements.txt
 
 
@@ -10,12 +17,22 @@ to train a new model, run the file: `trainModel.py`
 
 to run the API, run the file: `advice.py`
 
-to test the API, create a postmen POST request, use raw json and write
-``
+
+
+
+to test the API you can use postman. below follows the installation  link for postman.
+https://www.postman.com/downloads/
+
+create a postmen POST request, use raw json and write
+```
 {
     "Categories": [7,11]
 }
-``
+```
+
+
+
+
 Modify the numers within categories as you like
 TODO:
 - unit tests
