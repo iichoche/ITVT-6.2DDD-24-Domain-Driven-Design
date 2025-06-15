@@ -3,19 +3,22 @@ Repository voor DDD de beste groep
 
 The following installation guide is for Windows.
 
-Step 1: install conda from the link below.
+# Step 1: Install anaconda
+install conda from the link below.
 https://www.anaconda.com/download
-Step 2: Install the environment. run the command:
-# conda env create -f environment.yaml
+# Step 2: install the environment
+Install the environment. run the command:
+``` conda env create -f environment.yaml ```
 use the command below if to enter the environment:
-# conda activate advice
-Step 3: in the newly created environment, run the following command to install the dependencies:
-# pip install -r requirements.txt
+``` conda activate advice ```
+# Step 3: install dependencies
+in the newly created environment, run the following command to install the dependencies:
+``` pip install -r requirements.txt ```
 
 
-to train a new model, run the file: `trainModel.py`
+to train a new model, run the file: ```trainModel.py``` 
 
-to run the API, run the file: `advice.py`
+to run the API, run the file: ```advice.py```
 
 
 
