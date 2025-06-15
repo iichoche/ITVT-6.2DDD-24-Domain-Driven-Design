@@ -26,6 +26,8 @@ to run the API, run the file: ```advice.py```
 to test the API you can use postman. below follows the installation  link for postman.
 https://www.postman.com/downloads/
 
+
+Firstly add the ``` SECRET_API_KEY ``` together with the secret key value in the header.
 create a postmen POST request, use raw json and write
 ```
 {
