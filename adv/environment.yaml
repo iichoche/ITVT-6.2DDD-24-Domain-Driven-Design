@@ -1,0 +1,5 @@
+name: advice
+channels:
+  - conda-forge         
+dependencies:
+  - python=3.10.18
