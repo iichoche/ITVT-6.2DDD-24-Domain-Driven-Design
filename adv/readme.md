@@ -83,3 +83,10 @@ mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.
 
 de focus op de app ligt op advice.py, omdat deze cruciaal is voor de zorg, 
 trainModel heeft niets te maken met de zorg, het is alleen een systeem dat ik gebruik, 
+
+version UPDATES todo:
+
+4.0 Flasks & Gunicorns update (using gunicorn to adapt to WSGI services)
+1.0.0 Azure & Advice launch (complete Azure deployment)
+1.1.0 Tests & Units update (testing my Azure app)
+
