@@ -10,20 +10,14 @@ API_KEY = os.getenv("API_KEY")
 # Load the trained model
 model = joblib.load("healthcare_model.pkl")
 
-app = Flask(__name__)
-
-
-
-def verify_api_key(provided_key):
-    if provided_key != API_KEY:
-        return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
+app = Flask(__name__)   
 
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
     # Check for API Key in headers
     provided_key = request.headers.get("SECRET_API_KEY")
-    verify_api_key(provided_key)
-
+    if provided_key != API_KEY:
+        return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
     data = request.get_json()
     categories = data.get("Categories")
 

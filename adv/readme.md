@@ -1,6 +1,14 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
 Repository voor DDD de beste groep
 
+
+
+
+# Dockerfile
+to run the app using a dockerfile, use the command:
+``` docker-compose up --build```
+afterwards, turn on the image.
+
 The following installation guide is for Windows.
 
 # Step 1: Install anaconda
@@ -69,3 +77,9 @@ cross-cutting examples that can be added:
 - Computer security
 
 decide later which are needed
+
+
+mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.py
+
+de focus op de app ligt op advice.py, omdat deze cruciaal is voor de zorg, 
+trainModel heeft niets te maken met de zorg, het is alleen een systeem dat ik gebruik, 
