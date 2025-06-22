@@ -1,0 +1,1 @@
+public record StartGebruikCommand(int ClientId, Guid ProductItemId);

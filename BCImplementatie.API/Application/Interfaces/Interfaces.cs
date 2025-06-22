@@ -1,0 +1,1 @@
+public interface IGebruikRepository { } public interface IEventPublisher { }

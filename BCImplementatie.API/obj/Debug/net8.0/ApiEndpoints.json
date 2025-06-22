@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "Implementatie.API.Controllers.GebruikController",
+    "Method": "GetGebruikById",
+    "RelativePath": "api/Gebruik/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Implementatie.API.Controllers.GebruikController",
+    "Method": "StartGebruik",
+    "RelativePath": "api/Gebruik/start",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
