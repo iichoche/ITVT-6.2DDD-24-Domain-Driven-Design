@@ -1,23 +1,23 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
-from dotenv import load_dotenv
+#rom dotenv import load_dotenv
 import os
 
-load_dotenv()  #for checking API_KEY
-API_KEY = os.getenv("API_KEY")
+# load_dotenv()  #for checking API_KEY
+# API_KEY = os.getenv("API_KEY")
 
 # Load the trained model
-model = joblib.load("healthcare_model.pkl")
+model = joblib.load("adv/healthcare_model.pkl")
 
 app = Flask(__name__)   
 
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
-    # Check for API Key in headers
-    provided_key = request.headers.get("SECRET_API_KEY")
-    if provided_key != API_KEY:
-        return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
+    # # Check for API Key in headers
+    # provided_key = request.headers.get("SECRET_API_KEY")
+    # if provided_key != API_KEY:
+    #     return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
     data = request.get_json()
     categories = data.get("Categories")
 
@@ -52,6 +52,11 @@ def get_advice():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/ping", methods=["GET"])
+def healthz():
+    return "OK", 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    host = os.environ.get("HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host=host, port=port)

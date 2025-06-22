@@ -6,3 +6,4 @@ scikit-learn==1.2.2
 matplotlib==3.7.1
 python-dotenv==1.1.0
 werkzeug==2.0.3
+gunicorn==23.0.0

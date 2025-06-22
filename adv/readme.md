@@ -88,5 +88,60 @@ version UPDATES todo:
 
 4.0 Flasks & Gunicorns update (using gunicorn to adapt to WSGI services)
 1.0.0 Azure & Advice launch (complete Azure deployment)
+
+
+
+code to run Azure launch
+```
+# 1) build a timestamp for uniqueness
+$timestamp = (Get-Date).ToString('yyyyMMddHHmmss')
+
+# 2) set all the names
+$RG       = 'rg-advice-api'
+$LOCATION = 'westeurope'
+$ACR      = "acradvice$timestamp"    # must be globally unique
+$PLAN     = 'asp-advice'
+$SITE     = "api-advice-$timestamp"  # must be globally unique
+
+# 3) login and create RG + ACR
+az login
+az group create --name $RG --location $LOCATION
+az acr create --resource-group $RG --name $ACR --sku Basic
+az acr login --name $ACR
+
+# 4) build & push your local image into ACR
+docker build -t advice-app:latest .
+$fullImage = "$($ACR).azurecr.io/advice-app:latest"
+docker tag advice-app:latest $fullImage
+docker push $fullImage
+
+# 5) make an App Service plan & Web App (Linux + B1 SKU)
+az appservice plan create `
+  --name $PLAN `
+  --resource-group $RG `
+  --is-linux `
+  --sku B1
+
+az webapp create `
+  --resource-group $RG `
+  --plan $PLAN `
+  --name $SITE `
+  --deployment-container-image-name $fullImage
+
+# 6) fetch ACR credentials, wire them into the Web App
+$acrCreds = az acr credential show --name $ACR | ConvertFrom-Json
+az webapp config container set `
+  --name $SITE `
+  --resource-group $RG `
+  --container-custom-image-name $fullImage `
+  --container-registry-server-url https://$($ACR).azurecr.io `
+  --container-registry-server-user $acrCreds.username `
+  --container-registry-server-password $acrCreds.passwords[0].value
+
+# 7) restart & tail logs to confirm
+az webapp restart --resource-group $RG --name $SITE
+az webapp log tail --resource-group $RG --name $SITE
+```
+
 1.1.0 Tests & Units update (testing my Azure app)
 
