@@ -135,18 +135,16 @@ az webapp create --resource-group $RESOURCE_GROUP_NAME --plan $PLAN --name $CONT
 ```
 
 
-
-
-
-
 ## maintenance:
 ```
 # update time and name accordingly to webname
-$WEBAPP_NAME = "acradvice20250622213824.azurewebsites.net"  
+$WEBAPP_NAME = "acradvice20250622213824"  
 
 rebuilding docker and pushing
 docker build -t acradvice20250622213824.azurecr.io/webappsimple:latest .
 docker push acradvice20250622213824.azurecr.io/webappsimple:latest
+# restart app
+az webapp restart --name $WEBAPP_NAME --resource-group $RESOURCE_GROUP_NAME
 ```
 
 

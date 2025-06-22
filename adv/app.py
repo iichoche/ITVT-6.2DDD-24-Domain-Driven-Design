@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 # load_dotenv()  #for checking API_KEY
-# API_KEY = os.getenv("API_KEY")
+EXPECTED_API_KEY = os.getenv("API_KEY")
 
 # Load the trained model
 model = joblib.load("model/healthcare_model.pkl")
@@ -14,10 +14,10 @@ app = Flask(__name__)
 
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
-    # # Check for API Key in headers
-    # provided_key = request.headers.get("SECRET_API_KEY")
-    # if provided_key != API_KEY:
-    #     return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
+    # Check API key in headers
+    provided_key = request.headers.get("X-API-KEY")
+    if not EXPECTED_API_KEY or provided_key != EXPECTED_API_KEY:
+        return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
     data = request.get_json()
     categories = data.get("Categories")
 
