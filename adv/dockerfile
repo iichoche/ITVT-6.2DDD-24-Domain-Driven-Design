@@ -1,19 +1,14 @@
-FROM continuumio/miniconda3
+# syntax=docker/dockerfile:1
+
+FROM python:3.10.8
 
 WORKDIR /app
 
-COPY environment.yaml .
 COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-RUN conda env create -f environment.yaml
-
-SHELL ["/bin/bash", "--login", "-c"]
-RUN conda run -n advice pip install --no-cache-dir -r requirements.txt
-
-# Copy your app code + model file into image
 COPY . .
 
-ENV FLASK_APP=advice
-ENV FLASK_ENV=testing
+EXPOSE 80
 
-CMD ["conda", "run", "-n", "advice", "gunicorn","--bind", "0.0.0.0:5000","advice:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]

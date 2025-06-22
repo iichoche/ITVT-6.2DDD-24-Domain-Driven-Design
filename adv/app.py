@@ -8,7 +8,7 @@ import os
 # API_KEY = os.getenv("API_KEY")
 
 # Load the trained model
-model = joblib.load("adv/healthcare_model.pkl")
+model = joblib.load("model/healthcare_model.pkl")
 
 app = Flask(__name__)   
 
@@ -56,7 +56,6 @@ def get_advice():
 def healthz():
     return "OK", 200
 
-if __name__ == "__main__":
-    host = os.environ.get("HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host=host, port=port)
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=80)

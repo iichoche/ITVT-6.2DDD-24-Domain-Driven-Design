@@ -103,17 +103,19 @@ $ACR      = "acradvice$timestamp"    # must be globally unique
 $PLAN     = 'asp-advice'
 $SITE     = "api-advice-$timestamp"  # must be globally unique
 
+SUBSCRIPTION_ID=$(az account show --query id --output tsv)
+
+
 # 3) login and create RG + ACR
 az login
 az group create --name $RG --location $LOCATION
+
 az acr create --resource-group $RG --name $ACR --sku Basic
+
 az acr login --name $ACR
 
 # 4) build & push your local image into ACR
-docker build -t advice-app:latest .
-$fullImage = "$($ACR).azurecr.io/advice-app:latest"
-docker tag advice-app:latest $fullImage
-docker push $fullImage
+az acr build --resource-group $RG --registry $ACR --image webappsimple:latest .
 
 # 5) make an App Service plan & Web App (Linux + B1 SKU)
 az appservice plan create `
@@ -121,6 +123,9 @@ az appservice plan create `
   --resource-group $RG `
   --is-linux `
   --sku B1
+
+
+
 
 az webapp create `
   --resource-group $RG `
@@ -145,3 +150,47 @@ az webapp log tail --resource-group $RG --name $SITE
 
 1.1.0 Tests & Units update (testing my Azure app)
 
+
+
+
+$timestamp = (Get-Date).ToString('yyyyMMddHHmmss')
+
+$RESOURCE_GROUP_NAME = 'api'
+$LOCATION = 'eastus'
+$CONTAINER_REGISTRY_NAME = "acradvice$timestamp"    # must be globally unique
+$PLAN     = 'asp-advice'
+$SITE     = "api-advice-$timestamp"  # must be globally unique
+
+
+
+az login
+
+az upgrade
+
+## Create a resource group and Azure Container Registry
+# create group
+az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+
+# create azure container registry
+az acr create --resource-group $RESOURCE_GROUP_NAME --name $CONTAINER_REGISTRY_NAME --sku Basic
+
+## Build the image in Azure Container Registry
+# build image
+# Log in to ACR
+az acr login --name $CONTAINER_REGISTRY_NAME
+
+# Build the Docker image locally
+docker build -t "${CONTAINER_REGISTRY_NAME}.azurecr.io/webappsimple:latest" .
+
+# Push the image to your ACR
+docker push "${CONTAINER_REGISTRY_NAME}.azurecr.io/webappsimple:latest"
+
+## Deploy web app to service
+# create app service plan
+az appservice plan create --name $PLAN --resource-group $RESOURCE_GROUP_NAME --sku B1 --is-linux
+
+# set env vironment as my subscription ID
+$SUBSCRIPTION_ID=$(az account show --query id --output tsv)
+
+export MSYS_NO_PATHCONV=1 # This line is for Windows users to prevent path conversion issues in Git Bash.
+az webapp create --resource-group $RESOURCE_GROUP_NAME --plan $PLAN --name $CONTAINER_REGISTRY_NAME --assign-identity [system] --role AcrPull --scope /subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP_NAME --acr-use-identity --acr-identity [system] --container-image-name $CONTAINER_REGISTRY_NAME.azurecr.io/webappsimple:latest
