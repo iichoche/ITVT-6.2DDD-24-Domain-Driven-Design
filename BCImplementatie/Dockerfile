@@ -28,5 +28,8 @@ COPY --from=build /app/publish .
 # 2.2 Expose port 80
 EXPOSE 80
 
+# after COPY --from=build /app/publish . 
+COPY appsettings.json . 
+
 # 2.3 Start the app (DLL must match the project name)
 ENTRYPOINT ["dotnet", "BCImplementatie.dll"]

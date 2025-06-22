@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // DEBUG: print the actual connection string
 Console.WriteLine("DB Conn: " + builder.Configuration.GetConnectionString("ImplementatieDb"));
 
+//log string to verify the connection string is being read correctly
+var conn = builder.Configuration.GetConnectionString("ImplementatieDb");
+Console.WriteLine("DEBUG CONNECTION STRING", $"▶ ConnectionString → '{conn}'");
+
 builder.Services.AddDbContext<ImplementatieDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("ImplementatieDb"),
                       sql => sql.EnableRetryOnFailure()));

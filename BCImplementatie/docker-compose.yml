@@ -24,7 +24,7 @@ services:
     ports:
       - "8080:80"
     environment:
-      ConnectionStrings__ImplementatieDb: "Server=sqlserver,1433;Database=Implementatie;User Id=sa;Password=P@ssw0rd123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True"
+      ConnectionStrings: ImplementatieDb=Server=tcp:sqlserver,1433;Database=Implementatie;User Id=sa;Password=P@ssw0rd123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True
     depends_on:
       sqlserver:
         condition: service_healthy
