@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: bcimplementatie-sql
+    environment:
+      SA_PASSWORD: "P@ssw0rd123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exit 0"]
+      interval: 10s
+      retries: 1
+
+
+  bcimplementatie:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bcimplementatie
+    ports:
+      - "8080:80"
+    environment:
+      ConnectionStrings__ImplementatieDb: "Server=sqlserver,1433;Database=Implementatie;User Id=sa;Password=P@ssw0rd123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
