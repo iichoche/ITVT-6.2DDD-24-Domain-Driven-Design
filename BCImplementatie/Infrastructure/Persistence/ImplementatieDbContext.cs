@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using BCImplementatie.Domain.Entities;
-using BCImplementatie.Domain.Events;
 using BCImplementatie.Domain.ValueObjects;
 
 namespace BCImplementatie.Infrastructure.Persistence ;
@@ -77,7 +76,7 @@ public class ImplementatieDbContext : DbContext
             b.Property(n => n.Description)
              .HasMaxLength(255)
              .IsRequired();
-
+            //Nog aanpassen op data van Lucas
             b.HasData(
                 new NeedCategory("Gezondheid", "Gezondheidszorg gerelateerde behoeften"),
                 new NeedCategory("Onderwijs", "Onderwijs gerelateerde behoeften")

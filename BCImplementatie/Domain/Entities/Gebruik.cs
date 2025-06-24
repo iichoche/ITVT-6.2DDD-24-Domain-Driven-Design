@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BCImplementatie.Domain.Entities
+﻿namespace BCImplementatie.Domain.Entities
 {
     public class Gebruik
     {

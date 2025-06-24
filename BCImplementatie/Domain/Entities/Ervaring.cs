@@ -8,7 +8,7 @@ namespace BCImplementatie.Domain.Entities
     public string Review { get; set; }
     public string Observatie { get; set; }
 
-    // Optioneel: navigatie
-    public Gebruik Gebruik { get; set; }
+        // Optioneel: // Navigatie terug naar parent Gebruik
+        public Gebruik Gebruik { get; set; }
     }
 } 
