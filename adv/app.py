@@ -1,15 +1,23 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
-#rom dotenv import load_dotenv
+#from dotenv import load_dotenv (for local API testing)
 import os
 
-# load_dotenv()  #for checking API_KEY
+#load_dotenv()  #for local checking API_KEY
 EXPECTED_API_KEY = os.getenv("API_KEY")
-
 # Load the trained model
-model = joblib.load("model/healthcare_model.pkl")
+model_dir = "model"
+model_files = [f for f in os.listdir(model_dir) if f.endswith(".pkl")]
 
+# Sort files by modification time, newest first
+model_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
+
+if model_files:
+    latest_model_path = os.path.join(model_dir, model_files[0])
+    model = joblib.load(latest_model_path)
+else:
+    raise FileNotFoundError("No model files found in the model directory.")
 app = Flask(__name__)   
 
 @app.route("/get_advice", methods=["POST"])
