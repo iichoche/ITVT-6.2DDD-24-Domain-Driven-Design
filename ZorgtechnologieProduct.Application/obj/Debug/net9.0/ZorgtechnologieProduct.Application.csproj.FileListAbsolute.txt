@@ -1,0 +1,15 @@
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\bin\Debug\net9.0\ZorgtechnologieProduct.Application.deps.json
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\bin\Debug\net9.0\ZorgtechnologieProduct.Application.dll
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\bin\Debug\net9.0\ZorgtechnologieProduct.Application.pdb
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\bin\Debug\net9.0\ZorgtechnologieProduct.Domain.dll
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\bin\Debug\net9.0\ZorgtechnologieProduct.Domain.pdb
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.csproj.AssemblyReference.cache
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.AssemblyInfoInputs.cache
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.AssemblyInfo.cs
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.csproj.CoreCompileInputs.cache
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\Zorgtech.7D02C652.Up2Date
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.dll
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\refint\ZorgtechnologieProduct.Application.dll
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ZorgtechnologieProduct.Application.pdb
+E:\ZorgtechnologieProductMicroservice\ZorgtechnologieProduct.Application\obj\Debug\net9.0\ref\ZorgtechnologieProduct.Application.dll

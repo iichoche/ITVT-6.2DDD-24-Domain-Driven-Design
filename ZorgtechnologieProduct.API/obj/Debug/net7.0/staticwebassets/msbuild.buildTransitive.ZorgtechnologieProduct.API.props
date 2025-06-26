@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\ZorgtechnologieProduct.API.props" />
+</Project>
