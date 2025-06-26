@@ -7,7 +7,7 @@ import json
 import joblib
 import matplotlib.pyplot as plt
 
-def generate_dataset(num_samples=5000, output_path="healthcare_dataset.json"):
+def generate_dataset(num_samples=5000, output_path="model/healthcare_dataset.json"):
     records = []
     
     # Define a mapping of healthcare technology to a correlated list of possible care need numbers, this is to add realism to the dataset.
@@ -43,7 +43,7 @@ def generate_dataset(num_samples=5000, output_path="healthcare_dataset.json"):
 
 
 
-def train_healthcare_model(json_file_path='healthcare_dataset.json', model_file_path='healthcare_model.pkl'):
+def train_healthcare_model(json_file_path='model/healthcare_dataset.json', model_file_path='model/log/healthcare_model.pkl'):
     # Step 1: Read the dataset
     with open(json_file_path, 'r') as file:
         data = json.load(file)
@@ -88,7 +88,7 @@ def train_healthcare_model(json_file_path='healthcare_dataset.json', model_file_
     class_names = [str(label) for label in sorted(y.unique())]
     
     plot_tree(model, feature_names=feature_cols, class_names=class_names, filled=True)
-    plt.savefig("decision_tree_visualization.png")
+    plt.savefig("model/log/decision_tree_visualization.png")
     plt.close()  
     print("Decision tree visualization saved as 'decision_tree_visualization.png'.")
 
