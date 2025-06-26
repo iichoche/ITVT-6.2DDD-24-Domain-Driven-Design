@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace BCImplementatie.Application.Commands.AddErvaring
+namespace BCImplementatie.Application.Commands.Ervaringen
 {
     public record AddErvaringCommand(
         Guid GebruikId,

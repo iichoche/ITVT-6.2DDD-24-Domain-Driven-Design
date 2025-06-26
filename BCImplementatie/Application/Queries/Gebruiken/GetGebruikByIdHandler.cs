@@ -13,3 +13,4 @@ namespace BCImplementatie.Application.Queries.Gebruiken
             => await _repo.GetByIdAsync(request.Id);
     }
 }
+

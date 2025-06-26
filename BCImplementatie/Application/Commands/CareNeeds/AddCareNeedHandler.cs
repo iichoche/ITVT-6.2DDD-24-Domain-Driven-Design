@@ -2,7 +2,7 @@ using MediatR;
 using BCImplementatie.Domain.Entities;
 using BCImplementatie.Application.Interfaces;
 
-namespace BCImplementatie.Application.Commands.AddCareNeed
+namespace BCImplementatie.Application.Commands.CareNeeds
 {
     public class AddCareNeedHandler : IRequestHandler<AddCareNeedCommand, CareNeed>
     {

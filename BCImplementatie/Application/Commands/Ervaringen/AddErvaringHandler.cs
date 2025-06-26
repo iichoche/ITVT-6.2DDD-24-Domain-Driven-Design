@@ -2,7 +2,7 @@ using MediatR;
 using BCImplementatie.Domain.Entities;
 using BCImplementatie.Application.Interfaces;
 
-namespace BCImplementatie.Application.Commands.AddErvaring
+namespace BCImplementatie.Application.Commands.Ervaringen
 {
     public class AddErvaringHandler : IRequestHandler<AddErvaringCommand, Ervaring>
     {
