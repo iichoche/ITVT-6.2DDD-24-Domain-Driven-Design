@@ -6,6 +6,11 @@ import random
 import json
 import joblib
 import matplotlib.pyplot as plt
+import json
+import requests
+from datetime import datetime
+import os
+
 
 def generate_dataset(num_samples=5000, output_path="model/healthcare_dataset.json"):
     records = []
@@ -40,58 +45,93 @@ def generate_dataset(num_samples=5000, output_path="model/healthcare_dataset.jso
     print(f"Generated dataset saved to {output_path}")
     return records
 
+# getting data from Implement database, however as that part isn't implemented yet, i still use the generated dataset for prod
+def fetch_dataset(
+    endpoint: str = "http://localhost:5050/get_history",
+    output_path: str = "model/healthcare_dataset.json",
+    save_to_file: bool = False
+):
+    try:
+        resp = requests.get(endpoint, timeout=10)
+        resp.raise_for_status()
+        records = resp.json()
+    except requests.RequestException as e:
+        print(f"Failed to fetch dataset from {endpoint!r}: {e}")
+        return []
 
+    if save_to_file:
+        try:
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(records, f, indent=2, ensure_ascii=False)
+            print(f"Fetched dataset saved to {output_path}")
+        except IOError as e:
+            print(f"Couldn’t write to {output_path!r}: {e}")
 
+    return records
 
-def train_healthcare_model(json_file_path='model/healthcare_dataset.json', model_file_path='model/log/healthcare_model.pkl'):
-    # Step 1: Read the dataset
+def train_healthcare_model(json_file_path='model/healthcare_dataset.json'):
+    # Step 1: get the dataset from the implement database, this doesn't work yet because immanuel isn't done yet
+    data = fetch_dataset()  # Uncomment this line to fetch the dataset from the endpoint
+    # as it's not don yet, ill get the dataset from the generated dataset
+    # Step 1: Read the dataset from the file
     with open(json_file_path, 'r') as file:
         data = json.load(file)
     df = pd.DataFrame(data)
-    print("Original DataFrame:")
-    print(df.head())
-    print(f"\nTotal records in the dataset: {len(df)}")
 
-    
+    # Step 2: preprocessing
     target = 'healthcareTech'
     if target not in df.columns:
         raise ValueError(f"Target column '{target}' not found in dataset.")
-    
-    # Use all other columns as features
     feature_cols = [col for col in df.columns if col != target]
     X = df[feature_cols]
     y = df[target]
     X = df[feature_cols].fillna(0)
 
-    # Create a train-test split (80% training, 20% testing)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
-    
-    model = DecisionTreeClassifier(random_state=42, max_depth=4)
-    model.fit(X_train, y_train)
-    
-    # Evaluate the model on both training and test sets
-    train_predictions = model.predict(X_train)
-    test_predictions = model.predict(X_test)
-    
-    train_accuracy = accuracy_score(y_train, train_predictions)
-    test_accuracy = accuracy_score(y_test, test_predictions)
-    
-    print(f"\nTraining Accuracy: {train_accuracy:.4f}")
-    print(f"Test Accuracy: {test_accuracy:.4f}")
-    
-    joblib.dump(model, model_file_path)
-    print(f"\nDecision Tree model trained and saved to '{model_file_path}'.")
-    
-    plt.figure(figsize=(20, 10))
-    class_names = [str(label) for label in sorted(y.unique())]
-    
-    plot_tree(model, feature_names=feature_cols, class_names=class_names, filled=True)
-    plt.savefig("model/log/decision_tree_visualization.png")
-    plt.close()  
-    print("Decision tree visualization saved as 'decision_tree_visualization.png'.")
 
+    # Step 3: training the model
+    clf = DecisionTreeClassifier(random_state=42, max_depth=4)
+    clf.fit(X_train, y_train)
+
+    train_acc = accuracy_score(y_train, clf.predict(X_train))
+    test_acc  = accuracy_score(y_test,  clf.predict(X_test))
+
+    # Step 4: logging the model in a dated log file
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    logdir    = os.path.join("model/log", f"Model-{timestamp}")
+    os.makedirs(logdir, exist_ok=True)
+
+    # add trained model to dated log file
+    model_filename = f"healthcare_model_{timestamp}.pkl"
+    model_path = os.path.join(logdir, model_filename)
+    joblib.dump(clf, model_path)
+    
+    # visualisation of the model, adding the date and accuracy to the image
+    fig = plt.figure(figsize=(20, 10))
+    plot_tree(
+        clf,
+        feature_names=X.columns,
+        class_names=[str(c) for c in sorted(y.unique())],
+        filled=True, rounded=True, fontsize=10
+    )
+    # text
+    footer = f"Date of training: {timestamp}    Train Accuracy: {train_acc:.4f}    Test Accuracy: {test_acc:.4f}"
+    fig.text(0.5, 0.01, footer, ha='center', va='bottom',
+             fontsize=12, color='gray')
+    #adding to dated log file
+    viz_path = os.path.join(logdir, "decision_tree_visualization.png")
+    fig.savefig(viz_path, bbox_inches='tight')
+    plt.close(fig)
+    
+    print(f" training completed, saved in:{viz_path}")
+    print(f"\n▶ Training accuracy: {train_acc:.4f}")
+    print(f"▶ Test     accuracy: {test_acc:.4f}")
+    
 if __name__ == "__main__":
+    #get dataset, disabled as this is not implemented yet by immanuel
+    #fetch_dataset()
+    
     generate_dataset()
     train_healthcare_model()
