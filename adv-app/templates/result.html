@@ -27,12 +27,12 @@
         {{ zorgtech[result.recommended_healthcareTech] }}
       </p>
 
-      <h5>Full Ranking</h5>
+      <h5>Percentage advies</h5>
       <table class="table table-striped">
         <thead>
           <tr>
             <th>Zorgtech</th>
-            <th>Probability (%)</th>
+            <th>Percentage (%)</th>
           </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
     <h4>Raw JSON</h4>
     <pre class="bg-light p-3">{{ result|tojson(indent=2) }}</pre>
 
-    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-4">← Back</a>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-4">← terug</a>
   </div>
 </body>
 </html>
