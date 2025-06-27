@@ -1,7 +1,7 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
 Repository voor DDD de beste groep
 
-
+Dit onderdeel is gemaakt door: Lucas
 
 
 # Dockerfile
@@ -35,8 +35,15 @@ to test the API you can use postman. below follows the installation  link for po
 https://www.postman.com/downloads/
 
 
-Firstly add the ``` SECRET_API_KEY ``` together with the secret key value in the header.
-create a postmen POST request, use raw json and write
+Firstly add the ``` X-API-KEY ``` together with the secret key in the authentication. 
+When you run the application locally, use the POST location of 
+local
+http://172.29.158.25//get_advice
+
+Development
+acradvice20250622213824.azurewebsites.net/get_advice
+
+Set the body to raw, and select JSON. Then add the following command:
 ```
 {
     "Categories": [7,11]
