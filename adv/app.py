@@ -1,69 +1,85 @@
-from flask import Flask, request, jsonify
-import joblib
-import numpy as np
-#from dotenv import load_dotenv (for local API testing)
-import os
+import os, json
+from flask import (
+    Flask, session, render_template,
+    request, redirect, url_for, flash
+)
+import requests
+from dotenv import load_dotenv
 
-#load_dotenv()  #for local checking API_KEY
-EXPECTED_API_KEY = os.getenv("API_KEY")
-# Load the trained model
-model_dir = "model"
-model_files = [f for f in os.listdir(model_dir) if f.endswith(".pkl")]
+load_dotenv()
+AZURE_URL = os.getenv("AZURE_URL")
+if not AZURE_URL:
+    raise RuntimeError("Set AZURE_URL in .env")
 
-# Sort files by modification time, newest first
-model_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
-
-if model_files:
-    latest_model_path = os.path.join(model_dir, model_files[0])
-    model = joblib.load(latest_model_path)
-else:
-    raise FileNotFoundError("No model files found in the model directory.")
-app = Flask(__name__)   
-
-@app.route("/get_advice", methods=["POST"])
-def get_advice():
-    # Check API key in headers
-    provided_key = request.headers.get("X-API-KEY")
-    if not EXPECTED_API_KEY or provided_key != EXPECTED_API_KEY:
-        return jsonify({"error": "Unauthorized. Invalid or missing API key."}), 401
-    data = request.get_json()
-    categories = data.get("Categories")
-
-    if not categories or not isinstance(categories, list):
-        return jsonify({"error": "Please provide 'CareNeeds' as a list of values."}), 400
-
-    try:
-        values = [int(val) for val in categories]
-
-        expected_num_features = model.n_features_in_
-        if len(values) < expected_num_features:
-            values += [0] * (expected_num_features - len(values))
-        elif len(values) > expected_num_features:
-            return jsonify({"error": f"Too many care needs. Max allowed is {expected_num_features}"}), 400
-
-        prediction = model.predict([values])
-        recommended = int(prediction[0])
-
-        probas = model.predict_proba([values])[0]
-        classes = model.classes_
-        ranking = [
-            {"healthcareTech": int(tech), "percentage": round(prob * 100, 2)}
-            for tech, prob in zip(classes, probas)
-        ]
-        ranking_sorted = sorted(ranking, key=lambda x: x["percentage"], reverse=True)
-
-        return jsonify({
-            "recommended_healthcareTech": recommended,
-            "healthcareTech_ranking": ranking_sorted
-        })
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/ping", methods=["GET"])
-def healthz():
-    return "OK", 200
+app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        api_key = request.form.get("api_key", "").strip()
+        body_text = request.form.get("body", "").strip()
+
+        # validate
+        if not api_key:
+            flash("API key is required.", "danger")
+        elif not body_text:
+            flash("JSON body is required.", "danger")
+        else:
+            # parse JSON
+            try:
+                payload = json.loads(body_text)
+            except json.JSONDecodeError as e:
+                flash(f"Invalid JSON: {e}", "danger")
+                return render_template(
+                    "input.html",
+                    api_key=api_key,
+                    body_text=body_text
+                )
+
+            # call Azure
+            headers = {
+                "Content-Type": "application/json",
+                "X-API-KEY": api_key
+            }
+            try:
+                resp = requests.post(
+                    AZURE_URL,
+                    json=payload,
+                    headers=headers,
+                    timeout=5
+                )
+                resp.raise_for_status()
+            except requests.RequestException as e:
+                flash(f"Error calling API: {e}", "danger")
+                return render_template(
+                    "input.html",
+                    api_key=api_key,
+                    body_text=body_text
+                )
+
+            # success → stash response and redirect
+            session["api_key"]  = api_key
+            session["payload"]  = payload
+            session["response"] = resp.json()
+            return redirect(url_for("result"))
+
+    # GET: prefill
+    sample = json.dumps({"Categories": [1, 0, 2, 5]}, indent=2)
+    return render_template(
+        "input.html",
+        api_key=session.get("api_key", ""),
+        body_text=session.get("body_text", sample)
+    )
+
+
+@app.route("/result")
+def result():
+    if "response" not in session:
+        return redirect(url_for("home"))
+    return render_template("result.html", result=session["response"])
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
