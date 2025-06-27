@@ -1,7 +1,7 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
 Repository voor DDD de beste groep
 
-
+Alles in deze branch is gemaakt door: Lucas
 
 This branch is dedicated to the training and logging of the decision tree model. this program is purely technical and only exists locally for API model maintenance.
 
