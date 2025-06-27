@@ -1,7 +1,7 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
 Repository voor DDD de beste groep
 
-Dit onderdeel is gemaakt door: Lucas
+Alles in deze branch is gemaakt door: Lucas
 
 
 # Dockerfile
