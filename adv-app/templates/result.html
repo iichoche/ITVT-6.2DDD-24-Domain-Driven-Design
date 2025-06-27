@@ -10,34 +10,45 @@
   <div class="container" style="max-width:700px;">
     <h2 class="mb-4">API Response</h2>
 
+    {# 1:Kraamzorg,2:Rolstoel,3:Bed,4:Traplift,5:Krukken,6:Brees #}
+    {% set zorgtech = {
+        1: "Kraamzorg",
+        2: "Rolstoel",
+        3: "Bed",
+        4: "Traplift",
+        5: "Krukken",
+        6: "Brees"
+      } %}
+
     {% if result.recommended_healthcareTech is defined %}
       <h4 class="mt-4">Recommendation</h4>
       <p>
         <strong>Recommended tech:</strong>
-        {{ result.recommended_healthcareTech }}
+        {{ zorgtech[result.recommended_healthcareTech] }}
       </p>
 
       <h5>Full Ranking</h5>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Tech</th>
+            <th>Zorgtech</th>
             <th>Probability (%)</th>
           </tr>
         </thead>
         <tbody>
         {% for row in result.healthcareTech_ranking %}
-            {% if row.percentage|float != 0 %}
+          {% if row.percentage|float != 0 %}
             <tr>
-                <td>{{ row.healthcareTech }}</td>
-                <td>{{ "%.2f"|format(row.percentage) }}</td>
+              <td>{{ zorgtech[row.healthcareTech] }}</td>
+              <td>{{ "%.2f"|format(row.percentage) }}</td>
             </tr>
-            {% endif %}
+          {% endif %}
         {% endfor %}
         </tbody>
       </table>
     {% endif %}
-    <br>
+  <br>
+</div>  <br>
     <h4>Raw JSON</h4>
     <pre class="bg-light p-3">{{ result|tojson(indent=2) }}</pre>
 
