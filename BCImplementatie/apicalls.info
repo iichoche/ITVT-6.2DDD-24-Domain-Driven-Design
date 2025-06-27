@@ -1,0 +1,77 @@
+
+http://localhost:8080/api
+
+### Endpoints
+
+| Methode | Pad                                 | Beschrijving                         |
+| ------- | ----------------------------------- | ------------------------------------ |
+| POST    | `/api/gebruik`                      | Start een nieuwe gebruikssessie      |
+| GET     | `/api/gebruik`                      | Haal alle gebruikssessies op         |
+| GET     | `/api/gebruik/{gebruikId}`          | Haal één gebruikssessie op           |
+| PUT     | `/api/gebruik/{gebruikId}`          | Update (stop) een gebruikssessie     |
+| DELETE  | `/api/gebruik/{gebruikId}`          | Verwijder een gebruikssessie         |
+| POST    | `/api/gebruik/{gebruikId}/care-needs`      | Voeg een CareNeed toe               |
+| GET     | `/api/care-needs`                   | Haal alle CareNeeds op               |
+| GET     | `/api/care-needs/{id}`              | Haal één CareNeed op                 |
+| PUT     | `/api/care-needs/{id}`              | Update een CareNeed                  |
+| DELETE  | `/api/care-needs/{id}`              | Verwijder een CareNeed               |
+| POST    | `/api/gebruik/{gebruikId}/ervaringen`      | Voeg een Ervaring toe               |
+| GET     | `/api/ervaringen`                   | Haal alle Ervaringen op              |
+| GET     | `/api/ervaringen/{id}`              | Haal één Ervaring op                 |
+| PUT     | `/api/ervaringen/{id}`              | Update een Ervaring                  |
+| DELETE  | `/api/ervaringen/{id}`              | Verwijder een Ervaring               |
+| GET     | `/api/needcategories`               | Haal alle NeedCategories op          |
+| GET     | `/api/needcategories/{name}`        | Haal één NeedCategory op             |
+
+*(Vervang `localhost` door jouw host of docker-container-naam indien nodig.)*
+
+---
+
+## 🚧 BFFApi
+
+### Base URL  
+De BFFApi draait op: http://localhost:3000/api
+
+
+
+### Orchestratie-endpoints
+
+| Methode | Pad                                       | Beschrijving                              |
+| ------- | ----------------------------------------- | ----------------------------------------- |
+| POST    | `/api/util/registreerGebruik`             | Start een gebruik via één enkele call     |
+| POST    | `/api/zorgbehoefte`                       | Registreer zorgbehoefte                   |
+| PUT     | `/api/zorgbehoefte/{id}/classificatie`    | Classificeer zorgbehoefte                 |
+| PUT     | `/api/zorgbehoefte/{id}`                  | Update zorgbehoefte                       |
+| DELETE  | `/api/zorgbehoefte/{id}`                  | Verwijder zorgbehoefte                    |
+| POST    | `/api/product/vrijgeven`                  | Vrijgeven van een product                 |
+| POST    | `/api/product/{id}/inuse`                 | Markeer product in gebruik                |
+| POST    | `/api/gebruik/{gebruikId}/ervaringen`     | Registreer gebruikerservaring via BFF     |
+
+---
+
+## 🚀 Lokale opstart
+
+```bash
+# Vanuit de root van de repo
+docker-compose up --build -d
+
+
+Postman info:
+Headers: 
+Key: X-API-KEY
+Value: Wachtwoord
+
+Voorbeeld JSON
+http://localhost:8080/api/gebruik
+    {
+        "id": "3462c234-13e7-4ab8-8847-4d25e18837b5",
+        "clientId": 42,
+        "zorgtechnologieProductItemId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "startTime": "2025-06-27T07:49:55.1470293",
+        "endTime": null,
+        "inGebruik": true,
+        "careNeeds": [],
+        "ervaringen": []
+    },
+
+en doooor...
