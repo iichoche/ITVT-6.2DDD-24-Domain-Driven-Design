@@ -3,3 +3,4 @@ pandas==1.5.3
 scikit-learn==1.2.2
 matplotlib==3.7.1
 requests==2.32.4
+mysql-connector-python==9.3.0
