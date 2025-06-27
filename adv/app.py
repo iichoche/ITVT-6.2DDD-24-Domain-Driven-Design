@@ -43,34 +43,38 @@ def home():
                 "Content-Type": "application/json",
                 "X-API-KEY": api_key
             }
+            resp = requests.post(
+                AZURE_URL,
+                json=payload,
+                headers=headers,
+                timeout=5
+            )
+
+            # get the json body
             try:
-                resp = requests.post(
-                    AZURE_URL,
-                    json=payload,
-                    headers=headers,
-                    timeout=5
-                )
-                resp.raise_for_status()
-            except requests.RequestException as e:
-                flash(f"Error calling API: {e}", "danger")
+                data = resp.json()
+            except ValueError:
+                data = {}
+
+            # call any errros that show up 
+            if resp.status_code != 200:
+                err_msg = data.get("error", resp.text)
+                flash(f"API error: {err_msg}", "danger")
                 return render_template(
                     "input.html",
                     api_key=api_key,
                     body_text=body_text
                 )
 
-            # success → stash response and redirect
-            session["api_key"]  = api_key
-            session["payload"]  = payload
-            session["response"] = resp.json()
+            # success
+            session["response"] = data
             return redirect(url_for("result"))
 
+
     # GET: prefill
-    sample = json.dumps({"Categories": [1, 0, 2, 5]}, indent=2)
     return render_template(
         "input.html",
         api_key=session.get("api_key", ""),
-        body_text=session.get("body_text", sample)
     )
 
 

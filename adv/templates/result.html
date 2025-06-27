@@ -10,9 +10,6 @@
   <div class="container" style="max-width:700px;">
     <h2 class="mb-4">API Response</h2>
 
-    <h4>Raw JSON</h4>
-    <pre class="bg-light p-3">{{ result|tojson(indent=2) }}</pre>
-
     {% if result.recommended_healthcareTech is defined %}
       <h4 class="mt-4">Recommendation</h4>
       <p>
@@ -29,15 +26,20 @@
           </tr>
         </thead>
         <tbody>
-          {% for row in result.healthcareTech_ranking %}
+        {% for row in result.healthcareTech_ranking %}
+            {% if row.percentage|float != 0 %}
             <tr>
-              <td>{{ row.healthcareTech }}</td>
-              <td>{{ row.percentage }}</td>
+                <td>{{ row.healthcareTech }}</td>
+                <td>{{ "%.2f"|format(row.percentage) }}</td>
             </tr>
-          {% endfor %}
+            {% endif %}
+        {% endfor %}
         </tbody>
       </table>
     {% endif %}
+    <br>
+    <h4>Raw JSON</h4>
+    <pre class="bg-light p-3">{{ result|tojson(indent=2) }}</pre>
 
     <a href="{{ url_for('home') }}" class="btn btn-secondary mt-4">← Back</a>
   </div>
