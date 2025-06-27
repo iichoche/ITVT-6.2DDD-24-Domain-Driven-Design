@@ -3,14 +3,16 @@ import joblib
 import numpy as np
 #from dotenv import load_dotenv (for local API testing)
 import os
+from config import Config
 
 #load_dotenv()  #for local checking API_KEY
-EXPECTED_API_KEY = os.getenv("API_KEY")
-# Load the trained model
-model_dir = "model"
+EXPECTED_API_KEY = Config.API_KEY
+model_dir = Config.MODEL_DIR
+
+
 model_files = [f for f in os.listdir(model_dir) if f.endswith(".pkl")]
 
-# Sort files by modification time, newest first
+# S ort files by modification time, newest first
 model_files.sort(key=lambda x: os.path.getmtime(os.path.join(model_dir, x)), reverse=True)
 
 if model_files:
@@ -18,7 +20,7 @@ if model_files:
     model = joblib.load(latest_model_path)
 else:
     raise FileNotFoundError("No model files found in the model directory.")
-app = Flask(__name__)   
+app = Flask(__name__)    
 
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
