@@ -7,9 +7,7 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-AZURE_URL = os.getenv("AZURE_URL")
-if not AZURE_URL:
-    raise RuntimeError("Set AZURE_URL in .env")
+AZURE_URL="https://acradvice20250622213824.azurewebsites.net/get_advice"
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
