@@ -26,7 +26,9 @@ jobs:
         pip install flask joblib scikit-learn
 
     - name: Run tests
+      working-directory: adv
       env:
         API_KEY: testkey123
+        PYTHONPATH: .
       run: |
         python -m unittest discover -s tests -p "*.py" -v

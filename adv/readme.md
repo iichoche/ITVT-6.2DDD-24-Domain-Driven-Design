@@ -95,8 +95,8 @@ version UPDATES todo:
 
 ~~4.0 Flasks & Gunicorns update (using gunicorn to adapt to WSGI services)~~ (no llonger needed as deployment automatically does this)
 ~~1.0.0 Azure & Advice launch (complete Azure deployment)~~
-1.1.0 Tests and API update (adding API keys and tests)
-
+~~1.1.0  API update (adding API keys)~~
+~~1.2.0 Tests and Units update~~
 ```
 $timestamp = (Get-Date).ToString('yyyyMMddHHmmss')
 
