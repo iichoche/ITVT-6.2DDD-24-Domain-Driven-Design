@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\ZorgtechnologieProduct.API.props" />
-</Project>
