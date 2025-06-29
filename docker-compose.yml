@@ -2,19 +2,6 @@ version: '3.8'
 
 services:
 
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: bcimplementatie-sql
-    environment:
-      SA_PASSWORD: "P@ssw0rd123"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
-    healthcheck:
-      test: ["CMD", "bash", "-c", "exit 0"]
-      interval: 10s
-      retries: 1
-
   bcimplementatie:
     build:
       context: ./BCImplementatie
@@ -38,7 +25,7 @@ services:
       - bcimplementatie
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - IMPLEMENTATIE_API_URL=http://bcimplementatie/api
+      - IMPLEMENTATIE_API_URL=https://bcimplementatie-app.azurewebsites.net/api
       - X_API_KEY=MijnSuperGeheimeKey123
     ports:
       - "3000:80"

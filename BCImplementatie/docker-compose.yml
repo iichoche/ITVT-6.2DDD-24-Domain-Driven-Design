@@ -1,21 +1,6 @@
 version: '3.8'
 
 services:
-
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: bcimplementatie-sql
-    environment:
-      SA_PASSWORD: "P@ssw0rd123"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
-    healthcheck:
-      test: ["CMD", "bash", "-c", "exit 0"]
-      interval: 10s
-      retries: 1
-
-
   bcimplementatie:
     build:
       context: .
@@ -24,7 +9,11 @@ services:
     ports:
       - "8080:80"
     environment:
-      ConnectionStrings: ImplementatieDb=Server=tcp:sqlserver,1433;Database=Implementatie;User Id=sa;Password=P@ssw0rd123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True
-    depends_on:
-      sqlserver:
-        condition: service_healthy
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:80"
+      ConnectionStrings__ImplementatieDb: "Server=tcp:implementatiesv.database.windows.net,1433;Initial Catalog=Implementatiedb;User ID=impadmin;Password=i2ukdJN19mVAXg;TrustServerCertificate=False;Encrypt=True;"
+
+      # Optioneel: Service Principal voor DefaultAzureCredential in Docker
+      # AZURE_CLIENT_ID: "<je-SP-app-id>"
+      # AZURE_TENANT_ID: "<je-tenant-id>"
+      # AZURE_CLIENT_SECRET: "<je-SP-secret>"

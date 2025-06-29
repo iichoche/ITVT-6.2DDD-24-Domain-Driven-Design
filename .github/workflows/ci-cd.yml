@@ -1,0 +1,84 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - BCImplementatie
+          - BFFApi
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ matrix.project }}/${{ matrix.project }}.csproj
+
+      - name: Build
+        run: dotnet build ${{ matrix.project }}/${{ matrix.project }}.csproj --no-restore --configuration Release
+
+      - name: Run tests
+        run: |
+          # veronderstelt dat je tests in een aparte Tests-project hebt
+          dotnet test --no-build --configuration Release
+
+  docker-build-and-push:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username:     ${{ secrets.ACR_USERNAME }}
+          password:     ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build & push BCImplementatie image
+        run: |
+          docker build \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }} \
+            -f BCImplementatie/Dockerfile \
+            BCImplementatie
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }}
+
+      - name: Build & push BFFApi image
+        run: |
+          docker build \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }} \
+            -f BFFApi/Dockerfile \
+            BFFApi
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }}
+
+  deploy-to-azure:
+    needs: docker-build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy BCImplementatie to App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_BCIMPLEMENTATIE_APP }}
+          images:   ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }}
+
+      - name: Deploy BFFApi to App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_BFFAPI_APP }}
+          images:   ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }}
