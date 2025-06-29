@@ -1,0 +1,48 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorgtechnologieProduct.API", "ZorgtechnologieProduct.API\ZorgtechnologieProduct.API.csproj", "{C7D95F71-BE0D-8D9C-69CD-BAD0716A59D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorgtechnologieProduct.Application", "ZorgtechnologieProduct.Application\ZorgtechnologieProduct.Application.csproj", "{95496BFD-97B1-4A29-5A5A-0C48C81F2C2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorgtechnologieProduct.Domain", "ZorgtechnologieProduct.Domain\ZorgtechnologieProduct.Domain.csproj", "{1ABA810A-2134-C83B-46B4-9D331BEF0AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorgtechnologieProduct.Infrastructure", "ZorgtechnologieProduct.Infrastructure\ZorgtechnologieProduct.Infrastructure.csproj", "{3A9829A3-02B9-FA80-8F89-DCEC351C2CA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorgtechnologieProduct.Tests", "ZorgtechnologieProduct.Tests\ZorgtechnologieProduct.Tests.csproj", "{C7BA7FDE-4527-490D-9357-17CA3845B684}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7D95F71-BE0D-8D9C-69CD-BAD0716A59D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D95F71-BE0D-8D9C-69CD-BAD0716A59D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D95F71-BE0D-8D9C-69CD-BAD0716A59D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D95F71-BE0D-8D9C-69CD-BAD0716A59D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95496BFD-97B1-4A29-5A5A-0C48C81F2C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95496BFD-97B1-4A29-5A5A-0C48C81F2C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95496BFD-97B1-4A29-5A5A-0C48C81F2C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95496BFD-97B1-4A29-5A5A-0C48C81F2C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABA810A-2134-C83B-46B4-9D331BEF0AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABA810A-2134-C83B-46B4-9D331BEF0AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABA810A-2134-C83B-46B4-9D331BEF0AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABA810A-2134-C83B-46B4-9D331BEF0AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9829A3-02B9-FA80-8F89-DCEC351C2CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9829A3-02B9-FA80-8F89-DCEC351C2CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9829A3-02B9-FA80-8F89-DCEC351C2CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9829A3-02B9-FA80-8F89-DCEC351C2CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7BA7FDE-4527-490D-9357-17CA3845B684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7BA7FDE-4527-490D-9357-17CA3845B684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7BA7FDE-4527-490D-9357-17CA3845B684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7BA7FDE-4527-490D-9357-17CA3845B684}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F14038B-F5EB-41AE-8D84-FB4BFAB34F39}
+	EndGlobalSection
+EndGlobal

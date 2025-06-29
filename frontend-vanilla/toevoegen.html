@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zorgtechnologie Producten - Product Toevoegen</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Zorgtechnologie Producten</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="toevoegen.html" aria-current="page">Product Toevoegen</a>
+  <a href="beschikbaarheid.html">Beschikbaarheid Bekijken</a>
+</nav>
+
+<main class="container">
+  <h2>Nieuw product toevoegen</h2>
+  <form id="productForm" class="form" onsubmit="toevoegen(event)" novalidate>
+    <label for="naam">Naam</label>
+    <input id="naam" name="naam" type="text" placeholder="Vul de productnaam in" required />
+
+    <label for="omschrijving">Omschrijving</label>
+    <input id="omschrijving" name="omschrijving" type="text" placeholder="Beschrijf het product" required />
+
+    <label for="kosten">Kosten (€)</label>
+    <input id="kosten" name="kosten" type="number" placeholder="Bijv. 100" min="0" step="0.01" required />
+
+    <label for="type">Type</label>
+    <input id="type" name="type" type="text" placeholder="Bijv. Medisch apparaat" required />
+
+    <button type="submit">Toevoegen</button>
+
+    <div id="melding" aria-live="polite"></div>
+  </form>
+</main>
+
+<footer>
+  &copy; 2025 Zorgtechnologie
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

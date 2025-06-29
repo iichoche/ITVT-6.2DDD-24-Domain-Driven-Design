@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zorgtechnologie Producten - Beschikbaarheid</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Zorgtechnologie Producten</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="toevoegen.html">Product Toevoegen</a>
+  <a href="beschikbaarheid.html">Beschikbaarheid Bekijken</a>
+</nav>
+
+<main class="container">
+  <h2>Beschikbaarheid van producten</h2>
+
+  <div class="filter-container">
+    <label for="filter">Filter op status:</label>
+    <select id="filter">
+      <option value="alles">Alles</option>
+      <option value="in">In gebruik</option>
+      <option value="uit">Uit gebruik</option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Omschrijving</th>
+        <th>Kosten</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="producten">
+      <!-- Producten worden hier dynamisch geladen -->
+    </tbody>
+  </table>
+</main>
+
+<footer>
+  &copy; 2025 Zorgtechnologie
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    initBeschikbaarheidPagina();
+  });
+</script>
+
+</body>
+</html>
