@@ -7,4 +7,4 @@ matplotlib==3.7.1
 python-dotenv==1.1.0
 werkzeug==2.0.3
 gunicorn==23.0.0
-servicebus-azure==7.14.2
+servicebus-azure==7.14.0
