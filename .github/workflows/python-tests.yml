@@ -30,6 +30,7 @@ jobs:
       working-directory: adv
       env:
         API_KEY: testkey123
+        TESTING: 1
         PYTHONPATH: .
       run: |
         python -m unittest discover -s tests -p "*.py" -v

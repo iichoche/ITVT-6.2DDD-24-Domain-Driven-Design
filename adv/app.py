@@ -15,6 +15,8 @@ from config import Config
 import logging
 
 
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(threadName)s %(message)s"
@@ -46,9 +48,9 @@ model = joblib.load(latest_model_path)
 app = Flask(__name__)
 
 
-# setting sender and receiver clients with keys
-sb_sender_client   = ServiceBusClient.from_connection_string(SB_SEND_CONN_STR)
-sb_receiver_client = ServiceBusClient.from_connection_string(SB_LISTEN_CONN_STR)
+if os.getenv("TESTING") != "1":
+    sb_sender_client   = ServiceBusClient.from_connection_string(SB_SEND_CONN_STR)
+    sb_receiver_client = ServiceBusClient.from_connection_string(SB_LISTEN_CONN_STR)
 
 
 #prediction function
