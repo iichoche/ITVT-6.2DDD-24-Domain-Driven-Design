@@ -143,11 +143,14 @@ def servicebus_worker():
 
                     # 3) Validate Categories field
                     categories = payload.get("Categories")
-                    if (
-                        not isinstance(categories, list)
-                        or not categories
-                        or not all(isinstance(x, int) for x in categories)
-                    ):
+                    
+                    values = [int(v) for v in categories]
+                    n_feats = model.n_features_in_
+                    
+                    # pad or reject
+                    if len(values) < n_feats:
+                        values += [0] * (n_feats - len(values))
+                    elif len(values) > n_feats:
                         receiver.dead_letter_message(
                             msg,
                             reason="Bad payload: 'Categories'",
@@ -184,7 +187,6 @@ def servicebus_worker():
                         )
 
 threading.Thread(target=servicebus_worker, daemon=True).start()
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
