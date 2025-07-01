@@ -112,42 +112,38 @@ def healthz():
 
 #service bus version
 def servicebus_worker():
-    """
-    Background thread that:
-      1. Listens on REQ_QUEUE for incoming JSON messages
-      2. Runs prediction
-      3. Sends result to RES_QUEUE with the same correlation_id
-    """
+      #1. Polls REQ_QUEUE indefinitely (with short idle waits)
+      #2. Runs prediction on each message
+      #3. Sends result to RES_QUEUE with the same correlation_id
     with sb_receiver_client, sb_sender_client:
-        receiver = sb_receiver_client.get_queue_receiver(
-            queue_name=REQ_QUEUE, max_wait_time=5
-        )
-        sender = sb_sender_client.get_queue_sender(
-            queue_name=RES_QUEUE
-        )
+        while True:
+            # open a fresh receiver + sender each cycle, wait up to 5s for new messages
+            with sb_receiver_client.get_queue_receiver(
+                queue_name=REQ_QUEUE,
+                max_wait_time=5
+            ) as receiver, sb_sender_client.get_queue_sender(
+                queue_name=RES_QUEUE
+            ) as sender:
 
-        for msg in receiver:
-            try:
-                body = json.loads(str(msg))
-                categories = body.get("Categories", [])
-                result = run_prediction(categories)
+                for msg in receiver:
+                    try:
+                        body       = json.loads(str(msg))
+                        categories = body.get("Categories", [])
+                        result     = run_prediction(categories)
 
-                reply = ServiceBusMessage(
-                    json.dumps(result),
-                    correlation_id=msg.correlation_id
-                )
-                sender.send_messages(reply)
-                receiver.complete_message(msg)
+                        reply = ServiceBusMessage(
+                            json.dumps(result),
+                            correlation_id=msg.correlation_id
+                        )
+                        sender.send_messages(reply)
+                        receiver.complete_message(msg)
 
-            except Exception as err:
-                # move invalid or failed messages to the dead-letter queue
-                receiver.dead_letter_message(msg, reason=str(err))
+                    except Exception as err:
+                        # move problematic messages to DLQ
+                        receiver.dead_letter_message(msg, reason=str(err))
 
-
-# start listener in a daemon thread
 threading.Thread(target=servicebus_worker, daemon=True).start()
 
 
-# ─── App Runner ───────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)

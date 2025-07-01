@@ -146,9 +146,11 @@ az webapp create --resource-group $RESOURCE_GROUP_NAME --plan $PLAN --name $CONT
 ```
 # update time and name accordingly to webname
 $WEBAPP_NAME = "acradvice20250622213824"  
-
+# make sure you're in the correct work folder
+cd adv
 rebuilding docker and pushing
 docker build -t acradvice20250622213824.azurecr.io/webappsimple:latest .
+az acr login --name $WEBAPP_NAME
 docker push acradvice20250622213824.azurecr.io/webappsimple:latest
 # restart app
 az webapp restart --name $WEBAPP_NAME --resource-group $RESOURCE_GROUP_NAME
