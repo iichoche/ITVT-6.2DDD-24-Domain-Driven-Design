@@ -107,7 +107,7 @@ def get_advice():
 def healthz():
     return "OK", 200
 
-#service bus application for deployment and messaging
+#service bus application for deployment and mes
 def servicebus_worker():
     with sb_receiver_client, sb_sender_client:
         while True:
@@ -143,14 +143,11 @@ def servicebus_worker():
 
                     # 3) Validate Categories field
                     categories = payload.get("Categories")
-                    
-                    values = [int(v) for v in categories]
-                    n_feats = model.n_features_in_
-                    
-                    # pad or reject
-                    if len(values) < n_feats:
-                        values += [0] * (n_feats - len(values))
-                    elif len(values) > n_feats:
+                    if (
+                        not isinstance(categories, list)
+                        or not categories
+                        or not all(isinstance(x, int) for x in categories)
+                    ):
                         receiver.dead_letter_message(
                             msg,
                             reason="Bad payload: 'Categories'",
@@ -158,19 +155,7 @@ def servicebus_worker():
                         )
                         continue
 
-                    # 4) Optionally enforce exact feature count
-                    if len(categories) != model.n_features_in_:
-                        receiver.dead_letter_message(
-                            msg,
-                            reason="Bad payload: wrong feature count",
-                            error_description=(
-                                f"Expected {model.n_features_in_} ints, "
-                                f"got {len(categories)}"
-                            )
-                        )
-                        continue
-
-                    # 5) Run prediction and reply
+                    # 4) Run prediction and reply
                     try:
                         result = run_prediction(categories)
                         reply = ServiceBusMessage(
@@ -187,6 +172,7 @@ def servicebus_worker():
                         )
 
 threading.Thread(target=servicebus_worker, daemon=True).start()
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
