@@ -1,0 +1,33 @@
+{
+    "Clients": [
+        {"ID":1,"BirthDate":"2000-07-11T00:00:00+02:00","Active":true},
+        {"ID":2,"BirthDate":"1978-06-29T00:00:00+02:00","Active":true},
+        {"ID":3,"BirthDate":"1968-09-15T00:00:00+02:00","Active":true},
+        {"ID":4,"BirthDate":"1997-02-08T00:00:00+01:00","Active":true},
+        {"ID":5,"BirthDate":"1995-06-25T00:00:00+01:00","Active":true},
+        {"ID":6,"BirthDate":"1997-02-08T00:00:00+01:00","Active":true}
+    ],
+    "HumanNames": [
+        {"ClientId":1,"text":"Mårten Margit Khalil","family":"Layth","given":"Mårten"},
+        {"ClientId":2,"text":"Hammurabi Arnaldo Kunal","family":"Miroslava","given":"Hammurabi"},
+        {"ClientId":3,"text":"Ianus Albína Peter","family":"Tshepo","given":"Ianus"},
+        {"ClientId":4,"text":"Noak Alaattin Raimonds","family":"Dip","given":"Noak"}
+    ],
+    "Addresses": [
+        {"ClientId":1,"Use":3,"Type":1,"Line":"Valkhof 232","City":"Amersfoort","Province":"Utrecht","PostalCode":"3701 GL","Country":"Netherlands"},
+        {"ClientId":1,"Use":3,"Type":1,"Line":"Valkhof 232","City":"Amersfoort","Province":"Utrecht","PostalCode":"3701 GL","Country":"Netherlands"},
+
+        {"ClientId":2,"Use":3,"Type":1,"Text":"","Line":"Valkhof 232","City":"Amersfoort","Province":"Utrecht","PostalCode":"3701 GL","Country":"Netherlands"},
+        {"ClientId":2,"Use":3,"Type":1,"Text":"","Line":"Valkhof 232","City":"Amersfoort","Province":"Utrecht","PostalCode":"3701 GL","Country":"Netherlands"}
+    ],
+    "ContactPoints": [
+        {"ClientId":1,"System":"Phone","Value":"06 1242 2342","Use":"Mobile","Rank":1},
+        {"ClientId":1,"System":"Email","Value":"layth@nomail.com","Use":"Home","Rank":1},
+
+        {"ClientId":2,"System":"Phone","Value":"06 1242 2342","Use":"Mobile","Rank":1},
+        {"ClientId":2,"System":"Email","Value":"hammurabiarnaldokunal@ianustshepo","Use":"Home","Rank":1}
+    ]
+}
+
+
+
