@@ -102,15 +102,17 @@ func GetAllClients(c echo.Context) error {
 func CreateNewClient(c echo.Context) error {
 	newClient := new(clientDTO)
 	if err := c.Bind(newClient); err != nil {
-		return c.String(http.StatusBadRequest, "bad request")
+		log.Output(1, err.Error())
+		return c.String(http.StatusBadRequest, "bad Request")
 	}
 
 	createClient := newClient.toModel()
-	if err := reposetories.CreateClient(createClient); err != nil {
-		return c.String(http.StatusBadRequest, "bad request")
+	err, clientId := reposetories.CreateClient(createClient)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "Internal Server Error")
 	}
 
-	return c.JSON(http.StatusAccepted, "")
+	return c.JSON(http.StatusCreated, clientId)
 }
 
 func GetClientById(c echo.Context) error {

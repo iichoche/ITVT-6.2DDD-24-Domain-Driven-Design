@@ -6,11 +6,11 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-func CreateClient(client Client) error {
+func CreateClient(client Client) (error, uint) {
 	if err := getConnection().Create(&client).Error; err != nil {
-		return err
+		return err, 0
 	}
-	return nil
+	return nil, client.ID
 }
 
 func ReadAllClients() ([]Client, error) {

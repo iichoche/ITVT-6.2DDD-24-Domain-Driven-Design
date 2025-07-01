@@ -2,13 +2,26 @@ package reposetories
 
 import (
 	"electronic-client-dossier/models"
-	"log"
+	"electronic-client-dossier/testutils"
 
+	"log"
+	"os"
+
+	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var connection *gorm.DB
+
+func Connected() bool {
+	return !getConnection().Config.DryRun
+}
+
+func Disconect() {
+	database, _ := getConnection().DB()
+	database.Close()
+}
 
 func getConnection() *gorm.DB {
 	if connection != nil {
@@ -17,9 +30,15 @@ func getConnection() *gorm.DB {
 
 	var db *gorm.DB
 	var err error
-	var dns = "service:service@tcp(127.0.0.1:3306)/service?charset=utf8mb4&parseTime=True&loc=Local"
 
-	db, err = gorm.Open(mysql.Open(dns))
+	if os.Getenv("APP_MODE") == "testing" {
+		var dsn = testutils.UNITTEST_DATABASE_ORIGINAL
+		db, err = gorm.Open(sqlite.Open(dsn))
+	} else {
+		var dns = "service:service@tcp(127.0.0.1:3306)/service?charset=utf8mb4&parseTime=True&loc=Local"
+		db, err = gorm.Open(mysql.Open(dns))
+	}
+
 	if err != nil {
 		panic("Database connection failed: " + err.Error())
 	} else {
@@ -47,6 +66,6 @@ func automigrate(db *gorm.DB) error {
 	return err
 }
 
-func Connected() bool {
-	return !getConnection().Config.DryRun
+func Create(Data interface{}) {
+	getConnection().Create(Data)
 }

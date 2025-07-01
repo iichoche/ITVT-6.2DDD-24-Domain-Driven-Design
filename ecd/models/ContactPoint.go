@@ -2,26 +2,24 @@ package models
 
 import "gorm.io/gorm"
 
-type ContactPointSystem int
+type ContactPointSystem string
 
 const (
-	CPSPhone ContactPointSystem = iota
-	CPSFax   ContactPointSystem = iota
-	CPSEmail ContactPointSystem = iota
-	CPSPager ContactPointSystem = iota
-	CPSUrl   ContactPointSystem = iota
-	CPSSms   ContactPointSystem = iota
-	CPSOther ContactPointSystem = iota
+	CPSPhone ContactPointSystem = "Phone"
+	CPSFax   ContactPointSystem = "Fax"
+	CPSEmail ContactPointSystem = "Email"
+	CPSPager ContactPointSystem = "Pager"
+	CPSSms   ContactPointSystem = "sms"
 )
 
-type ContactPointUse int
+type ContactPointUse string
 
 const (
-	CPUHome   ContactPointUse = iota
-	CPUWork   ContactPointUse = iota
-	CPUTemp   ContactPointUse = iota
-	CPUMobile ContactPointUse = iota
-	CPUOld    ContactPointUse = iota
+	CPUHome   ContactPointUse = "Home"
+	CPUWork   ContactPointUse = "Work"
+	CPUTemp   ContactPointUse = "Temp"
+	CPUMobile ContactPointUse = "Mobile"
+	CPUOld    ContactPointUse = "Old"
 )
 
 type ContactPoint struct {
