@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type AddressUse int
 
 const (
@@ -19,6 +21,8 @@ const (
 )
 
 type Address struct {
+	gorm.Model
+	ClientId   uint
 	Use        AddressUse
 	Type       AddressType
 	Text       string

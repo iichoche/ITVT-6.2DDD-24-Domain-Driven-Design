@@ -1,5 +1,7 @@
 package models
 
+import "gorm.io/gorm"
+
 type ContactPointSystem int
 
 const (
@@ -23,8 +25,10 @@ const (
 )
 
 type ContactPoint struct {
-	System ContactPointSystem
-	Value  string
-	Use    ContactPointUse
-	Rank   uint16
+	gorm.Model
+	ClientId uint
+	System   ContactPointSystem
+	Value    string
+	Use      ContactPointUse
+	Rank     uint16
 }

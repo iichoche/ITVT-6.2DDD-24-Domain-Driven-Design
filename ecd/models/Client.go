@@ -1,20 +1,21 @@
 package models
 
 import (
-	"time"
-
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
 type Client struct {
 	gorm.Model
-	Active    bool
-	BirthDate time.Time
-	Name      HumanName
-	Telecom   []ContactPoint
-	Address   []Address
+	Active       bool
+	BirthDate    datatypes.Date
+	DeceasedDate datatypes.Date
 
-	CareNeeds    []CareNeed
+	Name      HumanName
+	Addresses []Address
+	Telecoms  []ContactPoint
+
 	Observations []Observation
-	Diagnosis    []Diagnosis
+	Diagnosis    []Diagnoses
+	CareNeeds    []CareNeed
 }

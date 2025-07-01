@@ -1,21 +1,15 @@
 package models
 
 import (
-	"time"
-
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
 
 type Observation struct {
 	gorm.Model
-	ClientID    uint
-	DateNoted   time.Time
+	ClientId    uint
+	DateNoted   datatypes.Date
 	Description string
-	Measurments Measurment
-	Diagnosis   []Diagnosis
-}
-
-type Measurment struct {
-	DateTaken   time.Time
-	Description string
+	Measurments []Measurment
+	Diagnosis   []Diagnoses `gorm:"many2many:diagnoses_observation;"`
 }
