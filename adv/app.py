@@ -14,9 +14,6 @@ load_dotenv()
 from config import Config
 import logging
 
-
-
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(threadName)s %(message)s"
@@ -86,7 +83,7 @@ def run_prediction(categories):
     }
 
 
-# old HTTP system
+# HTTP system for testing and demo
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
     # API-Key check
@@ -110,37 +107,81 @@ def get_advice():
 def healthz():
     return "OK", 200
 
-#service bus version
+#service bus application for deployment and messaging
 def servicebus_worker():
-      #1. Polls REQ_QUEUE indefinitely (with short idle waits)
-      #2. Runs prediction on each message
-      #3. Sends result to RES_QUEUE with the same correlation_id
     with sb_receiver_client, sb_sender_client:
         while True:
-            # open a fresh receiver + sender each cycle, wait up to 5s for new messages
             with sb_receiver_client.get_queue_receiver(
-                queue_name=REQ_QUEUE,
-                max_wait_time=5
-            ) as receiver, sb_sender_client.get_queue_sender(
-                queue_name=RES_QUEUE
-            ) as sender:
-
+                    queue_name=REQ_QUEUE, max_wait_time=5
+                ) as receiver, sb_sender_client.get_queue_sender(
+                    queue_name=RES_QUEUE
+                ) as sender:
+                
                 for msg in receiver:
-                    try:
-                        body       = json.loads(str(msg))
-                        categories = body.get("Categories", [])
-                        result     = run_prediction(categories)
+                    # 1) Auth: use correlation_id as API-KEY
+                    provided_key = msg.correlation_id
+                    if provided_key != EXPECTED_API_KEY:
+                        receiver.dead_letter_message(
+                            msg,
+                            reason="Unauthorized: invalid API key",
+                            error_description="Check correlation_id"
+                        )
+                        continue
 
+                    # 2) Parse JSON from msg.body
+                    try:
+                        # msg.body may be a bytes generator
+                        body_bytes = b"".join(msg.body)
+                        payload = json.loads(body_bytes.decode("utf-8"))
+                    except Exception as e:
+                        receiver.dead_letter_message(
+                            msg,
+                            reason="Invalid JSON",
+                            error_description=str(e)
+                        )
+                        continue
+
+                    # 3) Validate Categories field
+                    categories = payload.get("Categories")
+                    if (
+                        not isinstance(categories, list)
+                        or not categories
+                        or not all(isinstance(x, int) for x in categories)
+                    ):
+                        receiver.dead_letter_message(
+                            msg,
+                            reason="Bad payload: 'Categories'",
+                            error_description="Must be non-empty list of ints"
+                        )
+                        continue
+
+                    # 4) Optionally enforce exact feature count
+                    if len(categories) != model.n_features_in_:
+                        receiver.dead_letter_message(
+                            msg,
+                            reason="Bad payload: wrong feature count",
+                            error_description=(
+                                f"Expected {model.n_features_in_} ints, "
+                                f"got {len(categories)}"
+                            )
+                        )
+                        continue
+
+                    # 5) Run prediction and reply
+                    try:
+                        result = run_prediction(categories)
                         reply = ServiceBusMessage(
                             json.dumps(result),
                             correlation_id=msg.correlation_id
                         )
                         sender.send_messages(reply)
                         receiver.complete_message(msg)
-
                     except Exception as err:
-                        # move problematic messages to DLQ
-                        receiver.dead_letter_message(msg, reason=str(err))
+                        receiver.dead_letter_message(
+                            msg,
+                            reason="Prediction error",
+                            error_description=str(err)
+                        )
 
 threading.Thread(target=servicebus_worker, daemon=True).start()
 
