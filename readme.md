@@ -1,17 +1,36 @@
-# ITVT-6.2DDD-24-Domain-Driven-Design
-Repository voor DDD de beste groep
+# ITVT-6.2DDD-24 - Domain-Driven Design
 
-commands:
-Voor de testing
+## Testen
+
+Om de backend tests uit te voeren, gebruik je het volgende commando:
 dotnet test
 dotnet test --logger "console;verbosity=detailed"
 
-De frontend
+## Frontend afzonderlijk draaien
+
+Ga naar de map `frontend-vanilla` en start een eenvoudige webserver via Python op poort 8080.
+
+Het commando hiervoor is:
 cd .\frontend-vanilla
 python -m http.server 8080
 
-backend
+## Backend afzonderlijk draaien en testen
+
+Ga naar de map `zorgtechnologieproduct.api`, zet de omgeving op `Development` en start vervolgens de applicatie. Houd er rekening mee dat de Azure Firewall van de database hiervoor actief moet zijn. Standaard staat deze uitgeschakeld vanwege de credits.
+Het commando voor dit is:
 cd zorgtechnologieproduct.api
 $env:ASPNETCORE_ENVIRONMENT="Development"
 dotnet run
-hiervoor moet de azure firewall worden opgezet van de database (staat uit vanwege credits)
+
+## Applicatie draaien met Docker
+
+Stop eerst eventueel actieve containers en bouw de applicatie opnieuw. Hiermee wordt zowel de backend als de frontend opgestart.
+De frontend is daarna bereikbaar via [http://localhost:3000](http://localhost:3000) en de API via [http://localhost:5000/swagger](http://localhost:5000/swagger).
+
+Het commando voor dit is
+docker-compose down
+docker-compose up --build
+
+## Belangrijke opmerking
+
+Er moet apart een `.env` bestand worden aangemaakt met de benodigde wachtwoorden etc voordat de applicatie voledig te gebruiken is.

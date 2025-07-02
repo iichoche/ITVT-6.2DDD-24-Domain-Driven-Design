@@ -40,13 +40,14 @@ function filterProducten() {
     let gefilterd = alleProducten;
 
     if (filter === "in") {
-        gefilterd = alleProducten.filter(p => p.inGebruik);
+        gefilterd = alleProducten.filter(p => p.inGebruik === true);
     } else if (filter === "uit") {
-        gefilterd = alleProducten.filter(p => !p.inGebruik);
+        gefilterd = alleProducten.filter(p => p.inGebruik === false);
     }
 
     toonProducten(gefilterd);
 }
+
 
 function toevoegen() {
     const naam = document.getElementById('naam').value.trim();
