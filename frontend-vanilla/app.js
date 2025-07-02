@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/producten";
+const API_URL = "http://localhost:5000/api/Producten";
 let alleProducten = [];
 
 function laadProducten() {
@@ -98,7 +98,7 @@ function annuleerAanpassing(id) {
     toonProducten(alleProducten);
 }
 
-// Opslaan van aanpassingen via PATCH
+// Opslaan van aanpassingen via PUT ipv PATCH
 function opslaanAanpassing(id) {
     const naam = document.getElementById(`edit-naam-${id}`).value.trim();
     const omschrijving = document.getElementById(`edit-omschrijving-${id}`).value.trim();
@@ -110,10 +110,10 @@ function opslaanAanpassing(id) {
         return;
     }
 
-    const data = { naam, omschrijving, kosten, type };
+    const data = { id, naam, omschrijving, kosten, type };
 
     fetch(`${API_URL}/${id}`, {
-        method: 'PATCH',
+        method: 'PUT',  // aangepast van PATCH naar PUT
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
@@ -173,6 +173,42 @@ function toonMelding(tekst, kleur) {
     meldingEl.textContent = tekst;
     meldingEl.style.color = kleur;
     setTimeout(() => meldingEl.textContent = '', 3000);
+}
+
+// Toevoegen van nieuw product (toegevoegd functie)
+function toevoegen(event) {
+    event.preventDefault();
+
+    const naam = document.getElementById('naam').value.trim();
+    const omschrijving = document.getElementById('omschrijving').value.trim();
+    const kosten = parseFloat(document.getElementById('kosten').value);
+    const type = document.getElementById('type').value.trim();
+
+    if (!naam || !omschrijving || !type || isNaN(kosten) || kosten < 0) {
+        toonMelding("Vul alle velden correct in.", "red");
+        return;
+    }
+
+    const nieuwProduct = { naam, omschrijving, kosten, type };
+
+    fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nieuwProduct)
+    })
+    .then(res => {
+        if (res.ok) return res.json();
+        else throw new Error('Fout bij toevoegen product');
+    })
+    .then(data => {
+        toonMelding(`Product "${data.naam}" toegevoegd.`, 'green');
+        document.getElementById('productForm').reset();
+        // Optioneel: productenlijst vernieuwen
+        // laadProducten();
+    })
+    .catch(error => {
+        toonMelding(error.message, 'red');
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

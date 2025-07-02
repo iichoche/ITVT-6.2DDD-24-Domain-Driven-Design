@@ -66,7 +66,33 @@ namespace ZorgtechnologieProduct.API.Controllers
             return Ok(product);
         }
 
-        // Nieuwe PATCH endpoint om 'InGebruik' te togglen of instellen
+        // PUT endpoint om een product te updaten
+        [HttpPut("{id}")]
+        public ActionResult PutProduct(Guid id, [FromBody] ZorgProduct product)
+        {
+            if (product == null || id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            var bestaandProduct = _context.Zorgproducten.FirstOrDefault(p => p.Id == id);
+            if (bestaandProduct == null)
+            {
+                return NotFound();
+            }
+
+            // Update properties
+            bestaandProduct.Naam = product.Naam;
+            bestaandProduct.Omschrijving = product.Omschrijving;
+            bestaandProduct.Kosten = product.Kosten;
+            bestaandProduct.Type = product.Type;
+
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        // PATCH endpoint om 'InGebruik' te togglen of instellen
         [HttpPatch("{id}/gebruik")]
         public ActionResult ToggleInGebruik(Guid id, [FromBody] bool inGebruik)
         {
