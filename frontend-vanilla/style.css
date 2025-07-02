@@ -186,6 +186,43 @@ tr:hover {
     font-weight: 700;
 }
 
+/* Nieuwe styling voor knoppen */
+button.toggle-btn {
+    background: #2a4d69;
+    color: white;
+    padding: 0.3em 0.7em;
+    margin-right: 0.3em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+button.toggle-btn:hover,
+button.toggle-btn:focus {
+    background: #1c3550;
+    outline: none;
+}
+
+button.delete-btn {
+    background: #c0392b;
+    color: white;
+    padding: 0.3em 0.7em;
+    margin-right: 0.3em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+button.delete-btn:hover,
+button.delete-btn:focus {
+    background: #922b21;
+    outline: none;
+}
+
 @media (max-width: 600px) {
     .filter-container {
         flex-direction: column;

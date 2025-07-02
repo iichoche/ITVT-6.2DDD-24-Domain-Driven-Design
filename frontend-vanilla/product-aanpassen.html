@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Zorgtechnologie Producten - Beschikbaarheid</title>
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zorgtechnologie Producten - Product aanpassen/Verwijderen</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
-<body id="beschikbaarheid">
+<body id="product-aanpassen">
 
 <header>
   <h1>Zorgtechnologie Producten</h1>
@@ -16,15 +16,15 @@
   <a href="index.html">Home</a>
   <a href="toevoegen.html">Product Toevoegen</a>
   <a href="beschikbaarheid.html">Beschikbaarheid Bekijken</a>
-  <a href="product-aanpassen.html" aria-current="page">Product aanpassen/Verwijderen</a>
+  <a href="aanpassen.html" aria-current="page">Product aanpassen/Verwijderen</a>
 </nav>
 
 <main class="container">
-  <h2>Beschikbaarheid van producten</h2>
+  <h2>Product aanpassen/Verwijderen</h2>
 
   <div class="filter-container">
     <label for="filter">Filter op status:</label>
-    <select id="filter">
+    <select id="filter" class="filter-select">
       <option value="alles">Alles</option>
       <option value="in">In gebruik</option>
       <option value="uit">Uit gebruik</option>
@@ -39,12 +39,13 @@
         <th>Kosten</th>
         <th>Type</th>
         <th>Status</th>
+        <th>Acties</th>
       </tr>
     </thead>
-    <tbody id="producten">
-      <!-- Producten worden hier dynamisch geladen -->
-    </tbody>
+    <tbody id="producten"></tbody>
   </table>
+
+  <div id="melding" aria-live="polite"></div>
 </main>
 
 <footer>
@@ -52,11 +53,5 @@
 </footer>
 
 <script src="app.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    initBeschikbaarheidPagina();
-  });
-</script>
-
 </body>
 </html>

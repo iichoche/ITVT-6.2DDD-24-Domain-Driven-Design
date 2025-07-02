@@ -65,5 +65,52 @@ namespace ZorgtechnologieProduct.API.Controllers
 
             return Ok(product);
         }
+
+        // Nieuwe PATCH endpoint om 'InGebruik' te togglen of instellen
+        [HttpPatch("{id}/gebruik")]
+        public ActionResult ToggleInGebruik(Guid id, [FromBody] bool inGebruik)
+        {
+            // Check of er al een item bestaat
+            var item = _context.ZorgtechnologieProductItems.FirstOrDefault(i => i.ZorgtechnologieProductId == id);
+            if (item == null)
+            {
+                // Maak nieuw item aan als niet bestaat
+                item = new ZorgtechnologieProductItem
+                {
+                    Id = Guid.NewGuid(),
+                    ZorgtechnologieProductId = id,
+                    InGebruik = inGebruik
+                };
+                _context.ZorgtechnologieProductItems.Add(item);
+            }
+            else
+            {
+                item.InGebruik = inGebruik;
+                _context.ZorgtechnologieProductItems.Update(item);
+            }
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        // DELETE endpoint om product te verwijderen (incl. eventuele items)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProduct(Guid id)
+        {
+            var product = _context.Zorgproducten.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+                return NotFound();
+
+            // Verwijder bijbehorende items
+            var items = _context.ZorgtechnologieProductItems.Where(i => i.ZorgtechnologieProductId == id);
+            _context.ZorgtechnologieProductItems.RemoveRange(items);
+
+            // Verwijder product
+            _context.Zorgproducten.Remove(product);
+
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
