@@ -11,26 +11,23 @@ import (
 )
 
 type careNeedDTO struct {
-	CareNeedId       uint   `json:"careneedid" form:"careneedid" query:"careneedid"`
-	ClientId         uint   `json:"clientid" form:"clientid" query:"clientid"`
-	Description      string `json:"description" form:"description" query:"description"`
-	ClassificationId uint   `json:"classificationid" form:"classificationid" query:"classificationid"`
-	ProductedAvice   uint   `json:"productedavice" form:"productedavice" query:"productedavice"`
+	CareNeedId     uint   `json:"careneedid" form:"careneedid" query:"careneedid"`
+	ClientId       uint   `json:"clientid" form:"clientid" query:"clientid"`
+	Description    string `json:"description" form:"description" query:"description"`
+	ProductedAvice uint   `json:"productedavice" form:"productedavice" query:"productedavice"`
 }
 
 func (dto *careNeedDTO) populate(model models.CareNeed) {
 	dto.CareNeedId = model.ID
 	dto.ClientId = model.ClientId
 	dto.Description = model.Description
-	dto.ClassificationId = model.ClassificationId
 	dto.ProductedAvice = model.ProductedAvice
 }
 
 func (dto careNeedDTO) toModel() models.CareNeed {
 	return models.CareNeed{
-		ClientId:         dto.ClientId,
-		Description:      dto.Description,
-		ClassificationId: dto.ClassificationId,
+		ClientId:    dto.ClientId,
+		Description: dto.Description,
 	}
 }
 

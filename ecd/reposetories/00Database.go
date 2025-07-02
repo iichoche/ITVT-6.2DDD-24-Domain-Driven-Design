@@ -2,7 +2,7 @@ package reposetories
 
 import (
 	"electronic-client-dossier/models"
-	"electronic-client-dossier/testutils"
+	"electronic-client-dossier/utilities"
 
 	"log"
 	"os"
@@ -32,10 +32,10 @@ func getConnection() *gorm.DB {
 	var err error
 
 	if os.Getenv("APP_MODE") == "testing" {
-		var dsn = testutils.UNITTEST_DATABASE_ORIGINAL
+		var dsn = utilities.UNITTEST_DATABASE_ORIGINAL
 		db, err = gorm.Open(sqlite.Open(dsn))
 	} else {
-		var dns = "service:service@tcp(127.0.0.1:3306)/service?charset=utf8mb4&parseTime=True&loc=Local"
+		var dns = os.Getenv("DNS")
 		db, err = gorm.Open(mysql.Open(dns))
 	}
 

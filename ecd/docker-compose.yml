@@ -1,0 +1,9 @@
+services:
+  electronicclientdossier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: electronicclientdossier
+    environment:
+    ports:
+      - "8080:80"

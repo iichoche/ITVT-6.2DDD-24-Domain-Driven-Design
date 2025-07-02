@@ -1,4 +1,4 @@
-package testutils
+package utilities
 
 import (
 	"log"

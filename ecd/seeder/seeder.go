@@ -9,10 +9,11 @@ import (
 )
 
 type JsonData struct {
-	Clients       []models.Client       `json:"Clients"`
-	HumanNames    []models.HumanName    `json:"HumanNames"`
-	Addresses     []models.Address      `json:"Addresses"`
-	ContactPoints []models.ContactPoint `json:"ContactPoints"`
+	Clients        []models.Client         `json:"Clients"`
+	HumanNames     []models.HumanName      `json:"HumanNames"`
+	Addresses      []models.Address        `json:"Addresses"`
+	ContactPoints  []models.ContactPoint   `json:"ContactPoints"`
+	Classification []models.Classification `json:"Classification"`
 }
 
 func main() {

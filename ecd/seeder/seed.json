@@ -26,6 +26,16 @@
 
         {"ClientId":2,"System":"Phone","Value":"06 1242 2342","Use":"Mobile","Rank":1},
         {"ClientId":2,"System":"Email","Value":"hammurabiarnaldokunal@ianustshepo","Use":"Home","Rank":1}
+    ],
+    "Classification" : [
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""},
+        {"Name":"","Description":""}
     ]
 }
 
