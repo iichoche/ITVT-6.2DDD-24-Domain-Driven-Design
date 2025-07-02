@@ -1,3 +1,10 @@
+/* Globaal box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background: #eef2f5;
@@ -60,6 +67,8 @@ main.container {
     margin: 2em auto;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     flex-grow: 1;
+    min-width: 320px; /* Zorgt dat container niet te smal wordt */
+    box-sizing: border-box;
 }
 
 h2 {
@@ -74,6 +83,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     max-width: 420px;
+    width: 100%;
     margin: 1em auto 0 auto;
 }
 
@@ -81,7 +91,6 @@ h2 {
     padding: 0.65em;
     margin: 0.6em 0;
     width: 100%;
-    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
@@ -145,6 +154,7 @@ select {
     border: 1px solid #ccc;
     font-size: 1em;
     transition: border-color 0.3s ease;
+    min-width: 150px;
 }
 
 select:focus {
@@ -157,6 +167,8 @@ table {
     border-collapse: collapse;
     margin-bottom: 2em;
     font-size: 1em;
+    min-width: 320px; /* minimum breedte voor leesbaarheid */
+    table-layout: auto; /* laat kolommen flexibel */
 }
 
 th, td {
@@ -164,6 +176,7 @@ th, td {
     padding: 0.75em 1em;
     border-bottom: 1px solid #ddd;
     vertical-align: middle;
+    word-wrap: break-word; /* zorgt dat lange teksten niet uitrekken */
 }
 
 th {
@@ -223,6 +236,7 @@ button.delete-btn:focus {
     outline: none;
 }
 
+/* Responsiveness */
 @media (max-width: 600px) {
     .filter-container {
         flex-direction: column;
@@ -231,10 +245,7 @@ button.delete-btn:focus {
 
     table, thead, tbody, th, td, tr {
         display: block;
-    }
-
-    th, td {
-        padding: 0.6em 0.5em;
+        width: 100%;
     }
 
     th {
@@ -244,8 +255,32 @@ button.delete-btn:focus {
         padding-top: 1em;
     }
 
+    td {
+        padding-left: 50%;
+        position: relative;
+        text-align: left;
+    }
+
+    td::before {
+        position: absolute;
+        top: 0.75em;
+        left: 1em;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: 600;
+        color: #2a4d69;
+        content: attr(data-label);
+    }
+
     tr {
         margin-bottom: 1em;
         border-bottom: 1px solid #ddd;
+        padding-bottom: 1em;
+    }
+
+    /* Form en andere blokken full width */
+    .form {
+        max-width: 100%;
+        padding: 1.5em 1em;
     }
 }
