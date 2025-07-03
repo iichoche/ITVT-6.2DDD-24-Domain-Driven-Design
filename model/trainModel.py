@@ -13,14 +13,12 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-
+# because the stuff from immanuel isn't there, i am generating a mock dataset, 
+# imagine in the future the healthare_dataset.json is the return i get from the azure service bus from immanuel
 def generate_dataset(
     num_samples: int = 5000,
     output_path: str = "model/healthcare_dataset.json",
 ) -> list:
-    """
-    Build a synthetic healthcare dataset and save it to JSON.
-    """
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     # Map each tech code to realistic care-need categories
@@ -48,16 +46,13 @@ def generate_dataset(
     print(f"✔ Generated dataset with {len(records)} records → {output_path}")
     return records
 
-
+# mockup for data collection, i added this so at least the idea is there (immanuael reee) 
+# ideally for the future i want to use azure service bus to get the data
 def fetch_dataset(
     endpoint: str = "http://localhost:5050/get_history",
     output_path: str = "model/healthcare_dataset.json",
     save_to_file: bool = False,
 ) -> list:
-    """
-    Attempt to pull historical data from your API. If it fails,
-    this returns an empty list and you can fall back to the generated JSON.
-    """
     try:
         resp = requests.get(endpoint, timeout=5)
         resp.raise_for_status()
@@ -69,7 +64,7 @@ def fetch_dataset(
         return data
 
     except requests.RequestException as exc:
-        print(f"⚠️  Failed to fetch dataset from {endpoint!r}: {exc}")
+        print(f"Failed to fetch dataset from {endpoint!r}: {exc}")
         return []
 
 
@@ -77,7 +72,7 @@ def train_healthcare_model(
     json_path: str = "model/healthcare_dataset.json",
     sqlite_path: str = "model/models.sqlite",
 ):
-    # 1) Load data (fetch or fall back)
+    # 1) Load data (again, data from immanuael not there, so am using the generated dataset)
     data = fetch_dataset(save_to_file=False)
     if not data:
         with open(json_path, "r", encoding="utf-8") as f:
