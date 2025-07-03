@@ -5,85 +5,48 @@ Alles in deze branch is gemaakt door: Lucas
 
 
 # Dockerfile
-to run the app using a dockerfile, use the command:
+om de app als een dockerfile te runnen gebruik de volgende command
 ``` docker-compose up --build```
 afterwards, turn on the image.
 
-The following installation guide is for Windows.
+# installatiestappen
 
-# Step 1: Install anaconda
-install conda from the link below.
+# Stap 1: Installeer anaconda
+installeer conda van de onderstaande link
 https://www.anaconda.com/download
-# Step 2: install the environment
-Install the environment. run the command:
+# Step 2: installeer de environment
+Installeer de environment. run de command:
 ``` conda env create -f environment.yaml ```
-use the command below if to enter the environment:
+gebruik de onderstaande command om de environment te openen
 ``` conda activate advice ```
-# Step 3: install dependencies
-in the newly created environment, run the following command to install the dependencies:
+# Step 3: installeer de dependencies
+in de envionment, installeer de dependencies met de onderstaande command
 ``` pip install -r requirements.txt ```
 
+run het programma: ```app.py``` om de het lokaal te testen. 
 
-to train a new model, run the file: ```trainModel.py``` 
-
-to run the API, run the file: ```advice.py```
-
-
-
-
-to test the API you can use postman. below follows the installation  link for postman.
+open daarna postman, hieronder volgt de link om het te downloaden
 https://www.postman.com/downloads/
 
 
 Firstly add the ``` X-API-KEY ``` together with the secret key in the authentication. 
-When you run the application locally, use the POST location of 
-local
-http://172.29.158.25//get_advice
+gebruik de POST locatie van /get_advice om de POST te testen. 
 
-Development
-acradvice20250622213824.azurewebsites.net/get_advice
-
-Set the body to raw, and select JSON. Then add the following command:
+gebruik de onderstaande body als test.
 ```
 {
     "Categories": [7,11]
 }
 ```
 
+om de unit testen te testen, run de onderstaande command:
+```python -m unittest tests.unittests```
+of run de action in github actions.
 
-
-
-Modify the numers within categories as you like
 TODO:
-- unit tests
+~~- unit tests~~
 - interface tests
 - integration tests
-
-
-cross-cutting examples that can be added:
-
-- Business rules
-- Caching
-- Code mobility
-- Data validation
-- Domain-specific optimizations
-- Environment variables and other global configuration settings
-- Error detection and correction
-- Internationalization and localization which includes Language localisation
-- Information security
-- Logging
-- Memory management
-- Monitoring
-- Persistence
-- Product features
-- Real-time constraints
-- Synchronization
-- Transaction processing
-- Context-sensitive help
-- Privacy
-- Computer security
-
-decide later which are needed
 
 
 mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.py
@@ -91,12 +54,7 @@ mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.
 de focus op de app ligt op advice.py, omdat deze cruciaal is voor de zorg, 
 trainModel heeft niets te maken met de zorg, het is alleen een systeem dat ik gebruik, 
 
-version UPDATES todo:
-
-~~4.0 Flasks & Gunicorns update (using gunicorn to adapt to WSGI services)~~ (no llonger needed as deployment automatically does this)
-~~1.0.0 Azure & Advice launch (complete Azure deployment)~~
-~~1.1.0  API update (adding API keys)~~
-~~1.2.0 Tests and Units update~~
+# Stappen voor azure deployment (vanaf start)
 ```
 $timestamp = (Get-Date).ToString('yyyyMMddHHmmss')
 
@@ -105,8 +63,6 @@ $LOCATION = 'eastus'
 $CONTAINER_REGISTRY_NAME = "acradvice$timestamp"    # must be globally unique
 $PLAN     = 'asp-advice'
 $SITE     = "api-advice-$timestamp"  # must be globally unique
-
-
 
 az login
 
@@ -142,7 +98,8 @@ az webapp create --resource-group $RESOURCE_GROUP_NAME --plan $PLAN --name $CONT
 ```
 
 
-## maintenance:
+## updaten azure deployment via docker
+open docker
 ```
 # update time and name accordingly to webname
 $WEBAPP_NAME = "acradvice20250622213824"  
@@ -157,3 +114,10 @@ az webapp restart --name $WEBAPP_NAME --resource-group $RESOURCE_GROUP_NAME
 ```
 
 
+# Cross cutting innovaties en concerns in de API
+1: data valitdatie of de ingevulde input correct is
+2: om de taak van API aan te houden, wordt er geen informatie opgeslagen in een database.
+3: Er is een configuratie file aangemaakt voor het aanpassen van environment variables en er zijn geen local variables
+4: logging toegepast om problemen op te sporen
+5: om privacy te voorkomen wordt er in de API en het trainen van het model geen cliënten informatie meegenomen
+6: er is een API key 

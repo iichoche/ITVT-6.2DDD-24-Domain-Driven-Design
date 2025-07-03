@@ -26,7 +26,7 @@ SB_SEND_CONN_STR = Config.SERVICEBUS_SEND_CONN_STR
 SB_LISTEN_CONN_STR = Config.SERVICEBUS_LISTEN_CONN_STR
 REQ_QUEUE = Config.REQUEST_QUEUE_NAME
 RES_QUEUE = Config.RESPONSE_QUEUE_NAME
-
+TESTING = Config.TESTING
 
 # model direction loading
 model_dir = Config.MODEL_DIR
@@ -44,8 +44,8 @@ model = joblib.load(latest_model_path)
 #flask app
 app = Flask(__name__)
 
-
-if os.getenv("TESTING") != "1":
+# if testing is on, disable service bus clients
+if TESTING == True:
     sb_sender_client   = ServiceBusClient.from_connection_string(SB_SEND_CONN_STR)
     sb_receiver_client = ServiceBusClient.from_connection_string(SB_LISTEN_CONN_STR)
 
