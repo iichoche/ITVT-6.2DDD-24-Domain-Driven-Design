@@ -25,21 +25,29 @@ namespace ZorgtechnologieProduct.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ZorgProductMetStatus>> GetProducten()
         {
-            var producten = from product in _context.Zorgproducten
-                            join item in _context.ZorgtechnologieProductItems
-                                on product.Id equals item.ZorgtechnologieProductId into itemGroup
-                            from item in itemGroup.DefaultIfEmpty()
-                            select new ZorgProductMetStatus
-                            {
-                                Id = product.Id,
-                                Naam = product.Naam,
-                                Omschrijving = product.Omschrijving,
-                                Type = product.Type,
-                                Kosten = product.Kosten,
-                                InGebruik = item != null && item.InGebruik
-                            };
+            try
+            {
+                var producten = from product in _context.Zorgproducten
+                                join item in _context.ZorgtechnologieProductItems
+                                    on product.Id equals item.ZorgtechnologieProductId into itemGroup
+                                from item in itemGroup.DefaultIfEmpty()
+                                select new ZorgProductMetStatus
+                                {
+                                    Id = product.Id,
+                                    Naam = product.Naam,
+                                    Omschrijving = product.Omschrijving,
+                                    Type = product.Type,
+                                    Kosten = product.Kosten,
+                                    InGebruik = item != null && item.InGebruik
+                                };
 
-            return Ok(producten.ToList());
+                return Ok(producten.ToList());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Fout bij ophalen van producten");
+                return StatusCode(500, $"Interne serverfout: {ex.Message}");
+            }
         }
 
         [HttpPost]
@@ -66,22 +74,16 @@ namespace ZorgtechnologieProduct.API.Controllers
             return Ok(product);
         }
 
-        // PUT endpoint om een product te updaten
         [HttpPut("{id}")]
         public ActionResult PutProduct(Guid id, [FromBody] ZorgProduct product)
         {
             if (product == null || id != product.Id)
-            {
                 return BadRequest();
-            }
 
             var bestaandProduct = _context.Zorgproducten.FirstOrDefault(p => p.Id == id);
             if (bestaandProduct == null)
-            {
                 return NotFound();
-            }
 
-            // Update properties
             bestaandProduct.Naam = product.Naam;
             bestaandProduct.Omschrijving = product.Omschrijving;
             bestaandProduct.Kosten = product.Kosten;
@@ -92,15 +94,12 @@ namespace ZorgtechnologieProduct.API.Controllers
             return NoContent();
         }
 
-        // PATCH endpoint om 'InGebruik' te togglen of instellen
         [HttpPatch("{id}/gebruik")]
         public ActionResult ToggleInGebruik(Guid id, [FromBody] bool inGebruik)
         {
-            // Check of er al een item bestaat
             var item = _context.ZorgtechnologieProductItems.FirstOrDefault(i => i.ZorgtechnologieProductId == id);
             if (item == null)
             {
-                // Maak nieuw item aan als niet bestaat
                 item = new ZorgtechnologieProductItem
                 {
                     Id = Guid.NewGuid(),
@@ -119,7 +118,6 @@ namespace ZorgtechnologieProduct.API.Controllers
             return NoContent();
         }
 
-        // DELETE endpoint om product te verwijderen (incl. eventuele items)
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
         {
@@ -127,11 +125,9 @@ namespace ZorgtechnologieProduct.API.Controllers
             if (product == null)
                 return NotFound();
 
-            // Verwijder bijbehorende items
             var items = _context.ZorgtechnologieProductItems.Where(i => i.ZorgtechnologieProductId == id);
             _context.ZorgtechnologieProductItems.RemoveRange(items);
 
-            // Verwijder product
             _context.Zorgproducten.Remove(product);
 
             _context.SaveChanges();

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/Producten";
+// const API_URL = "http://localhost:5000/api/Producten"; // Voor lokaal testen (eventueel aan- of uitzetten)
 let alleProducten = [];
 
 function laadProducten() {
@@ -28,7 +28,6 @@ function toonProducten(producten) {
         const tr = document.createElement('tr');
 
         if (p.isEditing) {
-            // Inline edit rij met invoervelden en opslaan/annuleer knoppen
             tr.innerHTML = `
                 <td><input type="text" id="edit-naam-${p.id}" value="${p.naam}"></td>
                 <td><input type="text" id="edit-omschrijving-${p.id}" value="${p.omschrijving}"></td>
@@ -41,7 +40,6 @@ function toonProducten(producten) {
                 </td>
             `;
         } else {
-            // Normale rij met knoppen bij aanpassen pagina
             tr.innerHTML = `
                 <td>${p.naam}</td>
                 <td>${p.omschrijving}</td>
@@ -80,7 +78,6 @@ function filterProducten() {
     toonProducten(gefilterd);
 }
 
-// Start inline aanpassen
 function startAanpassen(id) {
     alleProducten = alleProducten.map(p => ({
         ...p,
@@ -89,7 +86,6 @@ function startAanpassen(id) {
     toonProducten(alleProducten);
 }
 
-// Annuleer inline aanpassen
 function annuleerAanpassing(id) {
     alleProducten = alleProducten.map(p => ({
         ...p,
@@ -98,7 +94,6 @@ function annuleerAanpassing(id) {
     toonProducten(alleProducten);
 }
 
-// Opslaan van aanpassingen via PUT ipv PATCH
 function opslaanAanpassing(id) {
     const naam = document.getElementById(`edit-naam-${id}`).value.trim();
     const omschrijving = document.getElementById(`edit-omschrijving-${id}`).value.trim();
@@ -113,7 +108,7 @@ function opslaanAanpassing(id) {
     const data = { id, naam, omschrijving, kosten, type };
 
     fetch(`${API_URL}/${id}`, {
-        method: 'PUT',  // aangepast van PATCH naar PUT
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
@@ -175,7 +170,6 @@ function toonMelding(tekst, kleur) {
     setTimeout(() => meldingEl.textContent = '', 3000);
 }
 
-// Toevoegen van nieuw product (toegevoegd functie)
 function toevoegen(event) {
     event.preventDefault();
 
@@ -203,18 +197,24 @@ function toevoegen(event) {
     .then(data => {
         toonMelding(`Product "${data.naam}" toegevoegd.`, 'green');
         document.getElementById('productForm').reset();
-        // Optioneel: productenlijst vernieuwen
-        // laadProducten();
+        laadProducten();
     })
     .catch(error => {
         toonMelding(error.message, 'red');
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initBeschikbaarheidPagina() {
     const filterEl = document.getElementById('filter');
     if (filterEl) {
         filterEl.addEventListener('change', filterProducten);
     }
     laadProducten();
-});
+
+    const form = document.getElementById('productForm');
+    if (form) {
+        form.addEventListener('submit', toevoegen);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initBeschikbaarheidPagina);
