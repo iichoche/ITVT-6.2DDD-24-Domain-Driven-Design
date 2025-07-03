@@ -25,6 +25,7 @@ SB_LISTEN_CONN_STR = Config.SERVICEBUS_LISTEN_CONN_STR
 REQ_QUEUE = Config.REQUEST_QUEUE_NAME
 RES_QUEUE = Config.RESPONSE_QUEUE_NAME
 TESTING = Config.TESTING
+
 # model direction loading
 model_dir = Config.MODEL_DIR
 model_files = [f for f in os.listdir(model_dir) if f.endswith(".pkl")]
@@ -50,7 +51,7 @@ def healthz():
 
 
 # if testing is on, disable service bus clients
-if TESTING == True:
+if TESTING != "1":
     sb_sender_client   = ServiceBusClient.from_connection_string(SB_SEND_CONN_STR)
     sb_receiver_client = ServiceBusClient.from_connection_string(SB_LISTEN_CONN_STR)
 
@@ -117,7 +118,7 @@ def servicebus_worker():
                 ) as receiver, sb_sender_client.get_queue_sender(
                     queue_name=RES_QUEUE
                 ) as sender:
-                
+
                 for msg in receiver:
                     # 1) Auth: use correlation_id as API-KEY
                     provided_key = msg.correlation_id
@@ -131,6 +132,7 @@ def servicebus_worker():
 
                     # 2) Parse JSON from msg.body
                     try:
+                        # msg.body may be a bytes generator
                         body_bytes = b"".join(msg.body)
                         payload = json.loads(body_bytes.decode("utf-8"))
                     except Exception as e:
