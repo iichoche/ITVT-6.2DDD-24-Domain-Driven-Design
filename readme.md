@@ -34,3 +34,10 @@ docker-compose up --build
 ## Belangrijke opmerking
 
 Er moet apart een `.env` bestand worden aangemaakt met de benodigde wachtwoorden etc voordat de applicatie voledig te gebruiken is.
+
+## Live applicatie
+De applicatie kan ook vanuit azure worden gehost worden, dit is voor de demo vooral, omdat het permanent aan laten staan van de omgeving veel credits zal gaan kosten.
+wanneer deze live staan zijn ze te bereiken op:
+
+[https://zorgtech-frontend.graypebble-998bdebe.westeurope.azurecontainerapps.io](https://zorgtech-frontend.graypebble-998bdebe.westeurope.azurecontainerapps.io).
+[https://zorgtech-api.graypebble-998bdebe.westeurope.azurecontainerapps.io/swagger/index.html](https://zorgtech-api.graypebble-998bdebe.westeurope.azurecontainerapps.io/swagger/index.html).
