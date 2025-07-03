@@ -1,5 +1,3 @@
-# app.py
-
 import os
 import json
 import threading
@@ -27,7 +25,6 @@ SB_LISTEN_CONN_STR = Config.SERVICEBUS_LISTEN_CONN_STR
 REQ_QUEUE = Config.REQUEST_QUEUE_NAME
 RES_QUEUE = Config.RESPONSE_QUEUE_NAME
 TESTING = Config.TESTING
-
 # model direction loading
 model_dir = Config.MODEL_DIR
 model_files = [f for f in os.listdir(model_dir) if f.endswith(".pkl")]
@@ -43,6 +40,14 @@ model = joblib.load(latest_model_path)
 
 #flask app
 app = Flask(__name__)
+
+
+#ping test for health check
+@app.route("/ping", methods=["GET"])
+def healthz():
+    return "OK", 200
+
+
 
 # if testing is on, disable service bus clients
 if TESTING == True:
@@ -83,7 +88,7 @@ def run_prediction(categories):
     }
 
 
-# HTTP system for testing and demo
+# HTTP system for testing and demo. in deployment this will be replaced by service bus but it's here for the demo
 @app.route("/get_advice", methods=["POST"])
 def get_advice():
     # API-Key check
@@ -103,11 +108,7 @@ def get_advice():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/ping", methods=["GET"])
-def healthz():
-    return "OK", 200
-
-#service bus application for deployment and mes
+#service bus application for deployment and messaging
 def servicebus_worker():
     with sb_receiver_client, sb_sender_client:
         while True:
@@ -130,7 +131,6 @@ def servicebus_worker():
 
                     # 2) Parse JSON from msg.body
                     try:
-                        # msg.body may be a bytes generator
                         body_bytes = b"".join(msg.body)
                         payload = json.loads(body_bytes.decode("utf-8"))
                     except Exception as e:

@@ -45,8 +45,8 @@ of run de action in github actions.
 
 TODO:
 ~~- unit tests~~
-- interface tests
-- integration tests
+~~- interface tests~~
+~~- integration tests~~
 
 
 mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.py
