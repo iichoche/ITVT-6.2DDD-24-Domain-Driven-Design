@@ -7,7 +7,7 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-AZURE_URL="https://acradvice20250622213824.azurewebsites.net/get_advice"
+AZURE_URL = "https://acradvice20250622213824.azurewebsites.net/get_advice"
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -16,12 +16,12 @@ app.secret_key = os.urandom(24)
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        api_key = request.form.get("api_key", "").strip()
+        jwt_token = request.form.get("jwt_token", "").strip()
         body_text = request.form.get("body", "").strip()
 
         # validate
-        if not api_key:
-            flash("API key is required.", "danger")
+        if not jwt_token:
+            flash("JWT token is required.", "danger")
         elif not body_text:
             flash("JSON body is required.", "danger")
         else:
@@ -32,21 +32,29 @@ def home():
                 flash(f"Invalid JSON: {e}", "danger")
                 return render_template(
                     "input.html",
-                    api_key=api_key,
+                    jwt_token=jwt_token,
                     body_text=body_text
                 )
 
-            # call Azure
+            # call Azure with Authorization header
             headers = {
                 "Content-Type": "application/json",
-                "X-API-KEY": api_key
+                "Authorization": f"Bearer {jwt_token}"
             }
-            resp = requests.post(
-                AZURE_URL,
-                json=payload,
-                headers=headers,
-                timeout=5
-            )
+            try:
+                resp = requests.post(
+                    AZURE_URL,
+                    json=payload,
+                    headers=headers,
+                    timeout=5
+                )
+            except requests.RequestException as e:
+                flash(f"Request error: {e}", "danger")
+                return render_template(
+                    "input.html",
+                    jwt_token=jwt_token,
+                    body_text=body_text
+                )
 
             # get the json body
             try:
@@ -54,13 +62,12 @@ def home():
             except ValueError:
                 data = {}
 
-            # call any errros that show up 
             if resp.status_code != 200:
                 err_msg = data.get("error", resp.text)
                 flash(f"API error: {err_msg}", "danger")
                 return render_template(
                     "input.html",
-                    api_key=api_key,
+                    jwt_token=jwt_token,
                     body_text=body_text
                 )
 
@@ -68,11 +75,10 @@ def home():
             session["response"] = data
             return redirect(url_for("result"))
 
-
     # GET: prefill
     return render_template(
         "input.html",
-        api_key=session.get("api_key", ""),
+        jwt_token=session.get("jwt_token", "")
     )
 
 

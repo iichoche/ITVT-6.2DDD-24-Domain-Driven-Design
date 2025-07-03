@@ -8,7 +8,7 @@
 </head>
 <body class="p-5">
   <div class="container" style="max-width:600px;">
-    <h2 class="mb-4">Enter API Key &amp; Payload</h2>
+    <h2 class="mb-4">Enter JWT Token &amp; Payload</h2>
 
     {% with msgs = get_flashed_messages(with_categories=true) %}
       {% for cat, msg in msgs %}
@@ -18,9 +18,9 @@
 
     <form method="POST">
       <div class="mb-3">
-        <label class="form-label">X-API-KEY</label>
-        <input type="password" name="api_key"
-               value="{{ api_key }}"
+        <label class="form-label">JWT Token</label>
+        <input type="password" name="jwt_token"
+               value="{{ jwt_token }}"
                class="form-control" required>
       </div>
 
