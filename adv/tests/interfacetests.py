@@ -5,7 +5,7 @@ from unittest.mock import patch
 from app import app
 
 # Constants for JWT
-JWT_SECRET = "super-secret-key"
+JWT_SECRET = "test-key"
 JWT_ALGORITHM = "HS256"
 
 def generate_test_jwt():
@@ -26,7 +26,7 @@ class InterfaceTestCase(unittest.TestCase):
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.valid_token}"
         }
-
+# test 1: invalid categories type, string
     @patch('app.JWT_SECRET', JWT_SECRET)
     def test_invalid_categories_type(self):
         payload = {"Categories": "invalid_type"}
@@ -37,7 +37,7 @@ class InterfaceTestCase(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("error", response.get_json())
-
+#test 2: incorrect name of categories field
     @patch('app.JWT_SECRET', JWT_SECRET)
     def test_missing_categories_field(self):
         payload = {"NotCategory": [7,11]}
@@ -48,7 +48,7 @@ class InterfaceTestCase(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("error", response.get_json())
-
+#test 3: string in categories field, unconvertable to int
     @patch('app.JWT_SECRET', JWT_SECRET)
     def test_wrong_categories_field(self):
         payload = {"Categories": [7,"eleven"]}
@@ -59,7 +59,7 @@ class InterfaceTestCase(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 500)
         self.assertIn("error", response.get_json())
-
+#test 3: string in categories field, convertable to int
     @patch('app.JWT_SECRET', JWT_SECRET)
     def test_string_categories_field(self):
         payload = {"Categories": [7,"11"]}
@@ -72,7 +72,7 @@ class InterfaceTestCase(unittest.TestCase):
         data = response.get_json()
         self.assertIn("recommended_healthcareTech", data)
         self.assertIn("healthcareTech_ranking", data)
-
+#test 4: too many features, more than 5
     @patch('app.JWT_SECRET', JWT_SECRET)
     def test_too_many_features(self):
         payload = {"Categories": [7,11,23,14,2,3]}

@@ -1,16 +1,9 @@
 # ITVT-6.2DDD-24-Domain-Driven-Design
-Repository voor DDD de beste groep
+Repository voor de SCA-recommandatie API van DDD de beste groep
 
 Alles in deze branch is gemaakt door: Lucas
 
-
-# Dockerfile
-om de app als een dockerfile te runnen gebruik de volgende command
-``` docker-compose up --build```
-afterwards, turn on the image.
-
 # installatiestappen
-
 # Stap 1: Installeer anaconda
 installeer conda van de onderstaande link
 https://www.anaconda.com/download
@@ -25,34 +18,41 @@ in de envionment, installeer de dependencies met de onderstaande command
 
 run het programma: ```app.py``` om de het lokaal te testen. 
 
-open daarna postman, hieronder volgt de link om het te downloaden
+# Dockerfile
+om de app als een dockerfile te runnen gebruik de volgende command
+``` docker-compose up --build```
+daarna, run de image in docker. 
+
+
+# JWT token
+dit programma maakt gebruik van een JWT token. deze token is aangeleverd in het ingeleverde document op itslearning
+
+# testen met swagger
+Om de app te testen met swagger, open de directie ```/apidocs```
+daarin bevindt een swagger omgeving om ```get_advice``` te testen. 
+
+
+# testen met swagger
+open postman, hieronder volgt de link om het te downloaden
 https://www.postman.com/downloads/
 
 
-Firstly add the ``` X-API-KEY ``` together with the secret key in the authentication. 
-gebruik de POST locatie van /get_advice om de POST te testen. 
+gebruik de POST locatie van ```/get_advice``` om de POST te testen. 
 
-gebruik de onderstaande body als test.
+in authrorization, selecteer Authorization en voeg het type 'Bearer token' in
+voeg de JWT token toe.
+
+gebruik de onderstaande body voor een werkend response.
 ```
 {
     "Categories": [7,11]
 }
 ```
 
-om de unit testen te testen, run de onderstaande command:
+om de geschreven unit testen te testen, run de onderstaande command:
 ```python -m unittest tests.unittests```
 of run de action in github actions.
 
-TODO:
-~~- unit tests~~
-~~- interface tests~~
-~~- integration tests~~
-
-
-mijn idee is om trainModel.py zoveel mogelijk onafhankelijk te maken van advice.py
-
-de focus op de app ligt op advice.py, omdat deze cruciaal is voor de zorg, 
-trainModel heeft niets te maken met de zorg, het is alleen een systeem dat ik gebruik, 
 
 # Stappen voor azure deployment (vanaf start)
 ```
@@ -120,4 +120,5 @@ az webapp restart --name $WEBAPP_NAME --resource-group $RESOURCE_GROUP_NAME
 3: Er is een configuratie file aangemaakt voor het aanpassen van environment variables en er zijn geen local variables
 4: logging toegepast om problemen op te sporen
 5: om privacy te voorkomen wordt er in de API en het trainen van het model geen cliënten informatie meegenomen
-6: er is een API key 
+6: er is een API key die met JWT beveiligd is 
+7: er zijn verschillende github actions voor zelfgeschreven testen en een swagger omgeving om uitgebreid te testen met de API

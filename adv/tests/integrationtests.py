@@ -5,11 +5,11 @@ import jwt
 
 # Set env vars before importing app to ensure Config loads them
 os.environ["TESTING"] = "1"
-os.environ["JWT_SECRET"] = "super-secret-key"  # your JWT secret, if your app uses env var
+os.environ["JWT_SECRET"] = "test-key" 
 
 from app import app
 
-JWT_SECRET = "super-secret-key"
+JWT_SECRET = "test-key"
 JWT_ALGORITHM = "HS256"
 
 def generate_test_jwt():
@@ -30,7 +30,7 @@ class IntegrationTestCase(unittest.TestCase):
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.valid_token}"
         }
-
+# interagrion test 1: valid categories type, string in and out
     def test_valid_chain_prediction_response(self):
         payload = {"Categories": [7, 11]} 
         response = self.client.post(

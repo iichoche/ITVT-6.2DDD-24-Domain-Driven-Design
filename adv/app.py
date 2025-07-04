@@ -9,9 +9,9 @@ import joblib
 import jwt
 from jwt import InvalidTokenError
 from dotenv import load_dotenv
-
+from flasgger import Swagger, swag_from
+#env must be loaded before config
 load_dotenv()
-
 from config import Config
 
 # Logging setup
@@ -45,13 +45,14 @@ model = joblib.load(latest_model_path)
 
 # Flask app
 app = Flask(__name__)
+swagger = Swagger(app)
 
-# Health check
+# Health check (to check if the service runs)
 @app.route("/ping", methods=["GET"])
 def healthz():
     return "OK", 200
 
-# JWT verification function
+# JWT verification system function
 def verify_jwt(token):
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
@@ -74,7 +75,7 @@ def run_prediction(categories):
     pred = int(model.predict([values])[0])
     probas = model.predict_proba([values])[0]
     classes = model.classes_
-
+#response shape
     ranking = sorted(
         [
             {"healthcareTech": int(c), "percentage": round(p * 100, 2)}
@@ -92,11 +93,67 @@ def run_prediction(categories):
         "healthcareTech_ranking": ranking
     }
 
-# HTTP endpoint
+# HTTP endpoint get_advice, in future this will be disabled so only Service Bus will be used, but for the demo it was kept.
 @app.route("/get_advice", methods=["POST"])
+# swagger
+@swag_from({
+    "tags": ["Prediction"],
+    "parameters": [
+        {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": True,
+            "description": "JWT token with Bearer scheme. Example: 'Bearer xxxxx-xxxxx-xxx'",
+            "default": "Bearer <JWT token here>"
+        },
+        {
+            "name": "body",
+            "in": "body",
+            "required": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Categories": {
+                        "type": "array",
+                        "items": {"type": "integer"},
+                        "example": [7, 11]
+                    }
+                },
+                "required": ["Categories"]
+            }
+        }
+    ],
+    "responses": {
+        200: {
+            "description": "Prediction result",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "recommended_healthcareTech": {"type": "integer", "example": 1},
+                    "healthcareTech_ranking": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "healthcareTech": {"type": "integer"},
+                                "percentage": {"type": "number", "format": "float"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        400: {"description": "Invalid input"},
+        401: {"description": "Unauthorized"},
+        500: {"description": "Internal server error"}
+    }
+})
+
+# proces of model 
 def get_advice():
     auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
+    if not auth_header or not auth_header.startswith("Bearer"):
         return jsonify({"error": "Missing or invalid Authorization header"}), 401
 
     token = auth_header.split(" ")[1]
@@ -116,12 +173,12 @@ def get_advice():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Azure Service Bus clients
+# Azure Service Bus clients (disabled on testing mode)
 if TESTING != "1":
     sb_sender_client = ServiceBusClient.from_connection_string(SB_SEND_CONN_STR)
     sb_receiver_client = ServiceBusClient.from_connection_string(SB_LISTEN_CONN_STR)
 
-# Background Service Bus worker
+# Background Service Bus worker (disabled on testing mode)
 def servicebus_worker():
     if TESTING == "1":
         return

@@ -9,3 +9,4 @@ werkzeug==2.0.3
 gunicorn==23.0.0
 azure-servicebus==7.14.2
 PyJWT==2.10.1
+flasgger==0.9.7.1
