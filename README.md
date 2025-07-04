@@ -58,3 +58,8 @@ Deze repository bevat twee projecten:
 3. **Start alles** via Docker Compose in de root:
    ```bash
    docker-compose up --build -d
+
+   Azure URLs:
+https://implementatieapp-fucddyd2hqaaa8a7.northeurope-01.azurewebsites.net/
+
+https://bffapiapp-gte3e8bybhf6hxa6.northeurope-01.azurewebsites.net/
