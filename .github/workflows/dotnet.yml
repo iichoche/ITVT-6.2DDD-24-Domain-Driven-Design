@@ -1,0 +1,24 @@
+name: .NET Tests
+
+on:
+  push:
+    branches: [ Zorgtechnologie-product ]      # Alleen voor deze branch
+  pull_request:
+    branches: [ Zorgtechnologie-product ]      # Alleen voor deze branch
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest     # Gebruik een Windows runner
+
+    steps:
+    - uses: actions/checkout@v4         # Haal de code uit de repository
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4     # Installeer de juiste .NET SDK
+      with:
+        dotnet-version: 8.0.x           # Gebruik .NET 8.x
+    - name: Restore dependencies
+      run: dotnet restore               # Herstel NuGet packages
+    - name: Build
+      run: dotnet build --no-restore    # Bouw de oplossing (zonder opnieuw te restoren)
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal   # Voer de tests uit (zonder opnieuw te bouwen)
