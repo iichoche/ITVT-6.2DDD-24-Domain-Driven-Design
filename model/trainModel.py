@@ -13,7 +13,7 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-# because the stuff from immanuel isn't there, i am generating a mock dataset, 
+# because the stuff from implementation isn't ready, i am generating a mock dataset, 
 # imagine in the future the healthare_dataset.json is the return i get from the azure service bus from immanuel
 def generate_dataset(
     num_samples: int = 5000,
@@ -46,7 +46,7 @@ def generate_dataset(
     print(f"✔ Generated dataset with {len(records)} records → {output_path}")
     return records
 
-# mockup for data collection, i added this so at least the idea is there (immanuael reee) 
+# mockup for data collection, i added this so at least the idea is there 
 # ideally for the future i want to use azure service bus to get the data
 def fetch_dataset(
     endpoint: str = "http://localhost:5050/get_history",
@@ -72,7 +72,7 @@ def train_healthcare_model(
     json_path: str = "model/healthcare_dataset.json",
     sqlite_path: str = "model/models.sqlite",
 ):
-    # 1) Load data (again, data from immanuael not there, so am using the generated dataset)
+    # Load data (again, data from immanuael not there, so am using the generated dataset)
     data = fetch_dataset(save_to_file=False)
     if not data:
         with open(json_path, "r", encoding="utf-8") as f:
@@ -82,14 +82,14 @@ def train_healthcare_model(
     if "healthcareTech" not in df.columns:
         raise ValueError("`healthcareTech` column missing in JSON data")
 
-    # 2) Preprocess
+    # Preprocess
     X = df.drop(columns=["healthcareTech"]).fillna(0)
     y = df["healthcareTech"]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    # 3) Train
+    # Train
     clf = DecisionTreeClassifier(max_depth=4, random_state=42)
     clf.fit(X_train, y_train)
 
@@ -98,10 +98,10 @@ def train_healthcare_model(
     print(f"\n▶ Train accuracy: {train_acc:.4f}")
     print(f"▶ Test  accuracy: {test_acc:.4f}")
 
-    # 4) Serialize model
+    # Serialize model
     model_blob = pickle.dumps(clf)
 
-    # 5) Build and serialize the tree visualization
+    # Build and serialize the tree visualization
     fig = plt.figure(figsize=(20, 10))
     plot_tree(
         clf,
@@ -123,7 +123,7 @@ def train_healthcare_model(
     viz_blob = buf.getvalue()
     buf.close()
 
-    # 6) Store BLOBs in SQLite
+    # Store BLOBs in SQLite
     os.makedirs(os.path.dirname(sqlite_path), exist_ok=True)
     conn = sqlite3.connect(sqlite_path)
     cur  = conn.cursor()
@@ -142,7 +142,7 @@ def train_healthcare_model(
     )
     conn.commit()
     conn.close()
-    # Step 4: logging the model in a dated log file
+    # logging the model in a dated log file
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     logdir    = os.path.join("model/log", f"Model-{timestamp}")
     os.makedirs(logdir, exist_ok=True)
@@ -164,7 +164,7 @@ def train_healthcare_model(
     footer = f"Date of training: {timestamp}    Train Accuracy: {train_acc:.4f}    Test Accuracy: {test_acc:.4f}"
     fig.text(0.5, 0.01, footer, ha='center', va='bottom',
             fontsize=12, color='gray')
-    #adding to dated log file
+    # adding to dated log file
     viz_path = os.path.join(logdir, "decision_tree_visualization.png")
     fig.savefig(viz_path, bbox_inches='tight')
     plt.close(fig)
