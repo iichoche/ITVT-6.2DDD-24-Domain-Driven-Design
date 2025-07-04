@@ -4,6 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: electronicclientdossier
-    environment:
     ports:
       - "8080:80"
+    environment:
+      APP_MODE: CLOUD
+
+    

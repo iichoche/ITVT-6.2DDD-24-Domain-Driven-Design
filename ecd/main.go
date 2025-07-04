@@ -16,8 +16,11 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env")
-	utilities.FailOnError("Error loading .env file", err)
+	appmode := os.Getenv("APP_MODE")
+	if appmode == "testing" || appmode == "dev" {
+		err := godotenv.Load(".env")
+		utilities.FailOnError("Error loading .env file", err)
+	}
 
 	reposetories.Connected()
 
@@ -39,9 +42,7 @@ func main() {
 	})
 
 	// AMQP receiver
-	address := os.Getenv("ASB_ADDRESS")
-	utilities.FailOnStatement("environment variables not set", address == "")
-	err = messages.NewAMQPManager(ctx, address)
+	err := messages.NewAMQPManager(ctx)
 	utilities.FailOnError("Failed to init AMQP", err)
 
 	handlers := map[string]messages.HandlerFunc{

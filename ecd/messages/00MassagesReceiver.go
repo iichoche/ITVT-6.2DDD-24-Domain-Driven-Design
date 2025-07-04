@@ -5,6 +5,7 @@ import (
 	"electronic-client-dossier/utilities"
 	"fmt"
 	"log"
+	"os"
 	"sync"
 
 	"github.com/Azure/go-amqp"
@@ -27,8 +28,17 @@ type amqpManager struct {
 
 var manager *amqpManager
 
-func NewAMQPManager(ctx context.Context, connectionStr string) error {
-	conn, err := amqp.Dial(ctx, connectionStr, &amqp.ConnOptions{})
+// func makeConnectionString(format string) string {
+// 	var username = os.Getenv("DATABASE_USERNAME")
+// 	var password = os.Getenv("DATABASE_PASSWORD")
+// 	var server = os.Getenv("DATABASE_SERVER")
+// 	var port = os.Getenv("DATABASE_PORT")
+// 	var name = os.Getenv("DATABASE_NAME")
+// 	return fmt.Sprintf(format, username, password, server, port, name)
+// }
+
+func NewAMQPManager(ctx context.Context) error {
+	conn, err := amqp.Dial(ctx, os.Getenv("ASB"), &amqp.ConnOptions{})
 	if err != nil {
 		return fmt.Errorf("failed to dial AMQP: %w", err)
 	}
