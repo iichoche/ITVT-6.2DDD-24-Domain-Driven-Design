@@ -1,7 +1,263 @@
 [
   {
-    "ContainingType": "Implementatie.API.Controllers.GebruikController",
-    "Method": "GetGebruikById",
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "GetAll",
+    "RelativePath": "api/CareNeeds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "Create",
+    "RelativePath": "api/CareNeeds",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.CreateCareNeedDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "DeleteMany",
+    "RelativePath": "api/CareNeeds",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Int32[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "Get",
+    "RelativePath": "api/CareNeeds/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "Update",
+    "RelativePath": "api/CareNeeds/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.UpdateCareNeedDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.CareNeedsController",
+    "Method": "Delete",
+    "RelativePath": "api/CareNeeds/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "GetAll",
+    "RelativePath": "api/Ervaringen",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BCImplementatie.Application.DTOs.ErvaringDto, BCImplementatie, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "Create",
+    "RelativePath": "api/Ervaringen",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.CreateErvaringDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BCImplementatie.Application.DTOs.ErvaringDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "DeleteMany",
+    "RelativePath": "api/Ervaringen",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Int32[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "GetById",
+    "RelativePath": "api/Ervaringen/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BCImplementatie.Application.DTOs.ErvaringDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "Update",
+    "RelativePath": "api/Ervaringen/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.UpdateErvaringDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BCImplementatie.Application.DTOs.ErvaringDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.ErvaringenController",
+    "Method": "Delete",
+    "RelativePath": "api/Ervaringen/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikController",
+    "Method": "Start",
+    "RelativePath": "api/Gebruik",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.StartGebruikDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikController",
+    "Method": "GetAll",
+    "RelativePath": "api/Gebruik",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikController",
+    "Method": "GetById",
     "RelativePath": "api/Gebruik/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -16,13 +272,98 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Implementatie.API.Controllers.GebruikController",
-    "Method": "StartGebruik",
-    "RelativePath": "api/Gebruik/start",
-    "HttpMethod": "POST",
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "GetAll",
+    "RelativePath": "api/Gebruiken",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "Create",
+    "RelativePath": "api/Gebruiken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.CreateGebruikDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "DeleteMany",
+    "RelativePath": "api/Gebruiken",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Guid[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "Get",
+    "RelativePath": "api/Gebruiken/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "Update",
+    "RelativePath": "api/Gebruiken/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BCImplementatie.Application.DTOs.UpdateGebruikDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BCImplementatie.Controllers.GebruikenController",
+    "Method": "Delete",
+    "RelativePath": "api/Gebruiken/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

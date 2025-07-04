@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<RootNamespace>BCImplementatie</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BCPostman Tests\**" />
+    <Content Remove="BCPostman Tests\**" />
+    <EmbeddedResource Remove="BCPostman Tests\**" />
+    <None Remove="BCPostman Tests\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="appsettings.json" />
@@ -25,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BCPostman Tests\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

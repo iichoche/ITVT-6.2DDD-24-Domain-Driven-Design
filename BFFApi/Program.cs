@@ -2,18 +2,19 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) Lees base‐URL’s uit config of omgevingsvariabelen
+// read toggle & base‐URL + API‐key from config
+var swaggerOn = builder.Configuration.GetValue<bool>("ENABLE_SWAGGER");
 var implBase = builder.Configuration["IMPLEMENTATIE_API_URL"]!;
 
-// 2) Registreer je BFF‐HttpClient en voeg de API‐key header toe
-builder.Services.AddHttpClient("BFF", client =>
+// 1) register BFF‐client
+builder.Services.AddHttpClient("BFF", c =>
 {
-    client.BaseAddress = new Uri(implBase);
-    client.DefaultRequestHeaders.Add("X-API-KEY",
+    c.BaseAddress = new Uri(implBase);
+    c.DefaultRequestHeaders.Add("X-API-KEY",
         builder.Configuration["X_API_KEY"]!);
 });
 
-// 3) MVC + Swagger
+// 2) controllers & swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -23,12 +24,18 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// 3) swagger in dev or when toggled
+if (app.Environment.IsDevelopment() || swaggerOn)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// 4) HTTPS redirect
+app.UseHttpsRedirection();
+
+// 5) routing
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

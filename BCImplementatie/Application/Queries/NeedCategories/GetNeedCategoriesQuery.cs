@@ -1,5 +1,4 @@
-﻿using MediatR;
-using System.Collections.Generic;                  // for IEnumerable<T>
+﻿using System.Collections.Generic;                  // for IEnumerable<T>
 using System.Threading;                            // for CancellationToken
 using System.Threading.Tasks;                      // for Task<T>
 using MediatR;                                     // for IRequestHandler<,>

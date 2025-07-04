@@ -7,9 +7,6 @@ services:
       context: ./BCImplementatie
       dockerfile: Dockerfile
     container_name: bcimplementatie
-    depends_on:
-      sqlserver:
-        condition: service_healthy
     environment:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ImplementatieDb=Server=tcp:sqlserver,1433;Database=Implementatie;User Id=sa;Password=P@ssw0rd123;TrustServerCertificate=True

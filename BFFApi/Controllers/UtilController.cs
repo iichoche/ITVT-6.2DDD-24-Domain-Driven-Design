@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Text.Json;
+using BFFApi.Models;
+
 
 namespace BffApi.Controllers
 {
@@ -45,10 +47,4 @@ namespace BffApi.Controllers
             return Created(string.Empty, result);
         }
     }
-
-    // DTO’s
-    public record RegistreerGebruikRequest(string ProductNaam, string ClientNaam, JsonElement Config);
-    public record ProductDto(Guid ProductItemId);
-    public record ClientDto(int ClientId);
-    public record RegistreerGebruikResponse(Guid GebruikId, int ClientId, Guid ProductItemId);
 }

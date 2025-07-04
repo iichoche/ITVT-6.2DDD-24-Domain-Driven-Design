@@ -10,6 +10,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var swaggerOn = builder.Configuration.GetValue<bool>("ENABLE_SWAGGER");
 
 // decide whether to force SQL auth
 var useSql = builder.Configuration.GetValue<bool>("UseSqlAuth");
@@ -80,7 +81,7 @@ using (var scope = app.Services.CreateScope())
 // 8) HTTP pipeline
 
 // swagger only in dev
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || swaggerOn)
 {
     app.UseSwagger();
     app.UseSwaggerUI();

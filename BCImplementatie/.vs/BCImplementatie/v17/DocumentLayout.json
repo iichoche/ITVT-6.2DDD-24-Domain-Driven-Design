@@ -1,62 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\",
+  "WorkspaceRootPath": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\application\\commands\\startgebruik\\startgebruikhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:application\\commands\\startgebruik\\startgebruikhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\application\\commands\\startgebruik\\startgebruikcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:application\\commands\\startgebruik\\startgebruikcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Controllers\\GebruikController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\GebruikController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\apicalls.INFO||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:apicalls.INFO||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\controllers\\gebruikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:controllers\\gebruikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\domain\\entities\\gebruik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:domain\\entities\\gebruik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.Tests\\BCImplementatie.Tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BCImplementatie.Tests\\BCImplementatie.Tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\domain\\entities\\ervaring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:domain\\entities\\ervaring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\domain\\entities\\careneed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:domain\\entities\\careneed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\domain\\events\\gebruikgestartevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:domain\\events\\gebruikgestartevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\domain\\valueobjects\\needcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:domain\\valueobjects\\needcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BCImplementatie.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|d:\\data\\users\\imman\\documents\\che\\itvt-6.2ddd-24-domain-driven-design\\implementatie\\bcimplementatie\\application\\interfaces\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{141A45AE-DB00-6BC5-BE34-1234673CFC84}|BCImplementatie.csproj|solutionrelative:application\\interfaces\\interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,188 +54,143 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddCareNeedHandler.cs",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs",
+              "RelativeToolTip": "Application\\Commands\\CareNeeds\\AddCareNeedHandler.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T20:13:24.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T19:09:45.486Z",
+              "Title": "apicalls.INFO",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\apicalls.INFO",
+              "RelativeDocumentMoniker": "apicalls.INFO",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\apicalls.INFO",
+              "RelativeToolTip": "apicalls.INFO",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwBcAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-04T20:01:29.477Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Gebruik.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\Gebruik.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Gebruik.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\Gebruik.cs",
-              "RelativeToolTip": "Domain\\Entities\\Gebruik.cs",
+              "Title": "BCImplementatie.Tests.csproj",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.Tests\\BCImplementatie.Tests.csproj",
+              "RelativeDocumentMoniker": "BCImplementatie.Tests\\BCImplementatie.Tests.csproj",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.Tests\\BCImplementatie.Tests.csproj",
+              "RelativeToolTip": "BCImplementatie.Tests\\BCImplementatie.Tests.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-04T19:54:06.918Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddCareNeedCommand.cs",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs",
+              "RelativeToolTip": "Application\\Commands\\CareNeeds\\AddCareNeedCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T19:09:30.262Z",
+              "WhenOpened": "2025-07-04T19:49:43.505Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Ervaring.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\Ervaring.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Ervaring.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\Ervaring.cs",
-              "RelativeToolTip": "Domain\\Entities\\Ervaring.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "DeleteGebruikCommand.cs",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs",
+              "RelativeToolTip": "Application\\Commands\\StartGebruik\\DeleteGebruikCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T19:09:28.459Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-04T19:48:54.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CareNeed.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\CareNeed.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\CareNeed.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Entities\\CareNeed.cs",
-              "RelativeToolTip": "Domain\\Entities\\CareNeed.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GebruikController.cs",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Controllers\\GebruikController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GebruikController.cs",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Controllers\\GebruikController.cs",
+              "RelativeToolTip": "Controllers\\GebruikController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAAAD4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T19:09:26.468Z",
+              "WhenOpened": "2025-07-04T19:46:01.213Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "GebruikGestartEvent.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Events\\GebruikGestartEvent.cs",
-              "RelativeDocumentMoniker": "Domain\\Events\\GebruikGestartEvent.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\Events\\GebruikGestartEvent.cs",
-              "RelativeToolTip": "Domain\\Events\\GebruikGestartEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T19:09:23.511Z",
-              "EditorCaption": ""
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-07-04T09:35:56.133Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "NeedCategory.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\ValueObjects\\NeedCategory.cs",
-              "RelativeDocumentMoniker": "Domain\\ValueObjects\\NeedCategory.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Domain\\ValueObjects\\NeedCategory.cs",
-              "RelativeToolTip": "Domain\\ValueObjects\\NeedCategory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T19:09:19.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-06-22T18:39:50.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T17:25:41.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GebruikController.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Controllers\\GebruikController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GebruikController.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Controllers\\GebruikController.cs",
-              "RelativeToolTip": "Controllers\\GebruikController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T17:10:16.563Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Interfaces.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Interfaces\\Interfaces.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\Interfaces.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Interfaces\\Interfaces.cs",
-              "RelativeToolTip": "Application\\Interfaces\\Interfaces.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T17:10:13.552Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\docker-compose.yml",
-              "RelativeDocumentMoniker": "docker-compose.yml",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\docker-compose.yml",
-              "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-06-22T16:47:35.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StartGebruikHandler.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Commands\\StartGebruik\\StartGebruikHandler.cs",
-              "RelativeDocumentMoniker": "Application\\Commands\\StartGebruik\\StartGebruikHandler.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Commands\\StartGebruik\\StartGebruikHandler.cs",
-              "RelativeToolTip": "Application\\Commands\\StartGebruik\\StartGebruikHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:47:28.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StartGebruikCommand.cs",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Commands\\StartGebruik\\StartGebruikCommand.cs",
-              "RelativeDocumentMoniker": "Application\\Commands\\StartGebruik\\StartGebruikCommand.cs",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\Application\\Commands\\StartGebruik\\StartGebruikCommand.cs",
-              "RelativeToolTip": "Application\\Commands\\StartGebruik\\StartGebruikCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:47:27.459Z",
-              "EditorCaption": ""
+              "Title": "BCImplementatie.csproj",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.csproj",
+              "RelativeDocumentMoniker": "BCImplementatie.csproj",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\BCImplementatie.csproj",
+              "RelativeToolTip": "BCImplementatie.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-04T09:49:38.52Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-29T06:21:43.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\appsettings.json",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "D:\\Data\\Users\\Imman\\Documents\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\implementatie\\BCImplementatie\\appsettings.json",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T16:29:27.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T06:21:33.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\CHE\\ITVT-6.2DDD-24-Domain-Driven-Design\\BCImplementatie\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-29T06:20:32.469Z"
             }
           ]
         }

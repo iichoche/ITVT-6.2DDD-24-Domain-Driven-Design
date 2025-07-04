@@ -1,84 +1,79 @@
+﻿# .github/workflows/ci-cd.yml
+
 name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - Implementatie
+
+env:
+  # Jouw Container Registry login-server zonder suffix
+  ACR_NAME: bcimplementatie-ehccd8f4bmb3gkh7
+  IMAGE_NAME: bcimplementatie
+  # Naam van je Azure Web App for Containers
+  WEBAPP_NAME: implementatieapp-fucddyd2hqaaa8a7
+  # Resource group waarin zowel de ACR als de Web App zitten
+  RESOURCE_GROUP: BCImplementatie
+  # Slot (default ‘production’)
+  AZURE_WEBAPP_SLOT: production
 
 jobs:
-  build-and-test:
+  build_and_test:
+    name: 🛠️ Build & Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project:
-          - BCImplementatie
-          - BFFApi
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Setup .NET 8 SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ${{ matrix.project }}/${{ matrix.project }}.csproj
+        run: dotnet restore ./BCImplementatie/BCImplementatie.csproj
 
-      - name: Build
-        run: dotnet build ${{ matrix.project }}/${{ matrix.project }}.csproj --no-restore --configuration Release
+      - name: Build solution
+        run: dotnet build --no-restore ./BCImplementatie/BCImplementatie.csproj --configuration Release
 
-      - name: Run tests
-        run: |
-          # veronderstelt dat je tests in een aparte Tests-project hebt
-          dotnet test --no-build --configuration Release
+      - name: Run unit tests
+        run: dotnet test ./BCImplementatie.Tests/BCImplementatie.Tests.csproj --no-build --verbosity normal
 
-  docker-build-and-push:
-    needs: build-and-test
+
+  docker_and_deploy:
+    name: 🐳 Build & Deploy Docker image
+    needs: build_and_test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Login to ACR
+      - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
         with:
-          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
-          username:     ${{ secrets.ACR_USERNAME }}
-          password:     ${{ secrets.ACR_PASSWORD }}
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
+          username:     ${{ secrets.ACR_USERNAME_IMPLEMENTATIE }}
+          password:     ${{ secrets.ACR_PASSWORD_IMPLEMENTATIE }}
 
-      - name: Build & push BCImplementatie image
+      - name: Build and push Docker image
         run: |
           docker build \
-            -t ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }} \
-            -f BCImplementatie/Dockerfile \
-            BCImplementatie
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }}
+            --file BCImplementatie/Dockerfile \
+            --tag ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest \
+            --tag ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            .
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Build & push BFFApi image
-        run: |
-          docker build \
-            -t ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }} \
-            -f BFFApi/Dockerfile \
-            BFFApi
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }}
-
-  deploy-to-azure:
-    needs: docker-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy BCImplementatie to App Service
+      - name: Deploy to Azure Web App for Containers
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_BCIMPLEMENTATIE_APP }}
-          images:   ${{ secrets.ACR_LOGIN_SERVER }}/bcimplementatie:${{ github.sha }}
-
-      - name: Deploy BFFApi to App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.AZURE_BFFAPI_APP }}
-          images:   ${{ secrets.ACR_LOGIN_SERVER }}/bffapi:${{ github.sha }}
+          app-name:       ${{ env.WEBAPP_NAME }}
+          slot-name:      ${{ env.AZURE_WEBAPP_SLOT }}
+          images:         ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+          publish-profile: ${{ secrets.IMPLEMENTATIEAPPPUBLISHSETTINGS }}

@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Text.Json;
+using BFFApi.Models;
+
 
 namespace BffApi.Controllers
 {
@@ -29,11 +31,4 @@ namespace BffApi.Controllers
             return Created(string.Empty, await resp.Content.ReadFromJsonAsync<JsonElement>());
         }
     }
-
-    // --- DTO voor Ervaring ---
-    public record CreateErvaringDto(
-        DateTime Datum,
-        string Review,
-        string Observatie
-    );
 }

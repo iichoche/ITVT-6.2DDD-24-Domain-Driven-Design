@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using BFFApi.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -55,20 +56,4 @@ namespace BffApi.Controllers
             return NoContent();
         }
     }
-
-    // --- DTO’s voor Zorgbehoefte ---
-    public record CreateZorgBehoefteDto(
-        Guid GebruikId,
-        string NeedDescription,
-        string NeedCategoryName,
-        Guid? AdviesProductId
-    );
-
-    public record ClassifyZorgBehoefteDto(string CategoryName);
-
-    public record UpdateZorgBehoefteDto(
-        string NeedDescription,
-        string NeedCategoryName,
-        Guid? AdviesProductId
-    );
 }
