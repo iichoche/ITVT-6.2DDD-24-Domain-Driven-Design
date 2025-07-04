@@ -96,8 +96,8 @@ $SUBSCRIPTION_ID=$(az account show --query id --output tsv)
 export MSYS_NO_PATHCONV=1 # This line is for Windows users to prevent path conversion issues in Git Bash.
 az webapp create --resource-group $RESOURCE_GROUP_NAME --plan $PLAN --name $CONTAINER_REGISTRY_NAME --assign-identity [system] --role AcrPull --scope /subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP_NAME --acr-use-identity --acr-identity [system] --container-image-name $CONTAINER_REGISTRY_NAME.azurecr.io/webappsimple:latest
 ```
-
-
+# CI/CD Deployment
+voor CI/CD is de deployment uitgevoerd door middel van een Docker container registry. hieronder volgt de code om de deployment up te daten: (niet geautomatiseerd om te controleren van een deployment)
 ## updaten azure deployment via docker
 open docker
 ```
@@ -122,3 +122,4 @@ az webapp restart --name $WEBAPP_NAME --resource-group $RESOURCE_GROUP_NAME
 5: om privacy te voorkomen wordt er in de API en het trainen van het model geen cliënten informatie meegenomen
 6: er is een API key die met JWT beveiligd is 
 7: er zijn verschillende github actions voor zelfgeschreven testen en een swagger omgeving om uitgebreid te testen met de API
+8: er is CI/CD in de vorm van een Docker container registry
