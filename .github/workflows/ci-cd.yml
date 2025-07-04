@@ -33,13 +33,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore all projects
-        run: dotnet restore ./BCImplementatie.sln
+        run: dotnet restore BCImplementatie/BCImplementatie.sln
 
       - name: Build solution
-        run: dotnet build --no-restore ./BCImplementatie.sln --configuration Release
+        run: dotnet build --no-restore BCImplementatie/BCImplementatie.sln --configuration Release
 
       - name: Run unit tests
-        run: dotnet test ./BCImplementatie.Tests/BCImplementatie.Tests.csproj --no-build --verbosity normal
+        run: dotnet test BCImplementatie/BCImplementatie.Tests/BCImplementatie.Tests.csproj --no-build --verbosity normal
 
 
   docker_and_deploy:
