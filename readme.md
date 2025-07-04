@@ -7,7 +7,7 @@ Om de backend tests uit te voeren, gebruik het volgende commando in de hoofdmap 
 dotnet test
 dotnet test --logger "console;verbosity=detailed"
 ```
-
+Deze tests worden ook automatisch uitgevoerd bij elke push en pull op de zorgtechnologie-product branch bij de tab actions in github
 ## Frontend afzonderlijk draaien
 
 Navigeer naar de map `frontend-vanilla` en start een eenvoudige webserver via Python op poort 8080:
