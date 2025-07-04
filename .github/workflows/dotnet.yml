@@ -1,4 +1,4 @@
-name: .NET Tests
+name: .NET Tests #automatische tests voor de git actions omgeving
 
 on:
   push:
