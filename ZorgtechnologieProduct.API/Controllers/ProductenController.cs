@@ -22,6 +22,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             _logger = logger;
         }
 
+        // Haal alle producten op, inclusief status (in gebruik of niet)
         [HttpGet]
         public ActionResult<IEnumerable<ZorgProductMetStatus>> GetProducten()
         {
@@ -50,6 +51,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             }
         }
 
+        // Voeg een nieuw product toe
         [HttpPost]
         public ActionResult<ZorgProduct> PostProduct([FromBody] ZorgProduct product)
         {
@@ -63,6 +65,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
+        // Haal één product op via id
         [HttpGet("{id}")]
         public ActionResult<ZorgProduct> GetProduct(Guid id)
         {
@@ -74,6 +77,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             return Ok(product);
         }
 
+        // Pas een bestaand product aan
         [HttpPut("{id}")]
         public ActionResult PutProduct(Guid id, [FromBody] ZorgProduct product)
         {
@@ -94,6 +98,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             return NoContent();
         }
 
+        // Zet een product in of uit gebruik
         [HttpPatch("{id}/gebruik")]
         public ActionResult ToggleInGebruik(Guid id, [FromBody] bool inGebruik)
         {
@@ -118,6 +123,7 @@ namespace ZorgtechnologieProduct.API.Controllers
             return NoContent();
         }
 
+        // Verwijder een product (en bijbehorende items)
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
         {

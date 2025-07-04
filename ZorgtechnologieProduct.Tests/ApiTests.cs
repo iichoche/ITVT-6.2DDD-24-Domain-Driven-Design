@@ -12,23 +12,26 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+// Custom WebApplicationFactory om de testomgeving te configureren
 public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // Force the environment variable for the test host
+        // Zet de environment variable voor de test host op 'Testing'
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Testing");
         builder.UseEnvironment("Testing");
     }
 }
 
+// Testklasse voor de API
 public class ApiTests : IClassFixture<CustomWebApplicationFactory<ZorgtechnologieProduct.API.Program>>
 {
     private readonly HttpClient _client;
 
+    // Constructor: seed testdata en maak een HttpClient aan
     public ApiTests(CustomWebApplicationFactory<ZorgtechnologieProduct.API.Program> factory)
     {
-        // Seed testdata
+        // Voeg testdata toe aan de in-memory database
         using (var scope = factory.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<ZorgtechnologieProductDbContext>();
@@ -50,6 +53,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         _client = factory.CreateClient();
     }
 
+    // Test: GET /api/producten geeft een succesvolle response
     [Fact]
     public async Task GetProducten_ReturnsOk()
     {
@@ -59,6 +63,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         Assert.Contains("naam", content.ToLower());
     }
 
+    // Test: GET /api/producten bevat het testproduct
     [Fact]
     public async Task GetProducten_ResponseContainsTestProduct()
     {
@@ -68,6 +73,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         Assert.Contains("TestProduct", content);
     }
 
+    // Test: GET /api/producten geeft JSON terug
     [Fact]
     public async Task GetProducten_ResponseIsJson()
     {
@@ -76,6 +82,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
     }
 
+    // Test: POST /api/producten voegt een product toe en geeft Created terug
     [Fact]
     public async Task PostProducten_ReturnsCreatedAndContainsProduct()
     {
@@ -96,10 +103,11 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         Assert.Contains("PostTest", content);
     }
 
+    // Test: PUT /api/producten/{id} werkt en past het product aan
     [Fact]
     public async Task PutProduct_ReturnsNoContent_AndUpdatesProduct()
     {
-        // Eerst een bestaand product ophalen
+        // Haal eerst een bestaand product op
         var getResponse = await _client.GetAsync("/api/producten");
         getResponse.EnsureSuccessStatusCode();
         var producten = await getResponse.Content.ReadFromJsonAsync<List<ZorgProduct>>();
@@ -117,7 +125,7 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         var putResponse = await _client.PutAsJsonAsync($"/api/producten/{productToUpdate.Id}", updatedProduct);
         Assert.Equal(System.Net.HttpStatusCode.NoContent, putResponse.StatusCode);
 
-        // Controleren of update is doorgevoerd
+        // Controleer of de update is doorgevoerd
         var getUpdatedResponse = await _client.GetAsync($"/api/producten/{productToUpdate.Id}");
         getUpdatedResponse.EnsureSuccessStatusCode();
         var updatedContent = await getUpdatedResponse.Content.ReadFromJsonAsync<ZorgProduct>();
@@ -127,10 +135,11 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         Assert.Equal(10, updatedContent.Kosten);
     }
 
+    // Test: DELETE /api/producten/{id} verwijdert een product
     [Fact]
     public async Task DeleteProduct_ReturnsNoContent_AndProductIsDeleted()
     {
-        // Eerst een product toevoegen dat we gaan verwijderen
+        // Voeg eerst een product toe dat verwijderd gaat worden
         var nieuwProduct = new
         {
             naam = "DeleteTest",
@@ -142,11 +151,11 @@ public class ApiTests : IClassFixture<CustomWebApplicationFactory<Zorgtechnologi
         postResponse.EnsureSuccessStatusCode();
         var createdProduct = await postResponse.Content.ReadFromJsonAsync<ZorgProduct>();
 
-        // DELETE request sturen
+        // Stuur een DELETE request
         var deleteResponse = await _client.DeleteAsync($"/api/producten/{createdProduct.Id}");
         Assert.Equal(System.Net.HttpStatusCode.NoContent, deleteResponse.StatusCode);
 
-        // Controleren dat het product niet meer bestaat
+        // Controleer dat het product niet meer bestaat
         var getResponse = await _client.GetAsync($"/api/producten/{createdProduct.Id}");
         Assert.Equal(System.Net.HttpStatusCode.NotFound, getResponse.StatusCode);
     }
