@@ -80,7 +80,7 @@ using (var scope = app.Services.CreateScope())
 
 // 8) HTTP pipeline
 
-// swagger only in dev
+// swagger only in dev.
 if (app.Environment.IsDevelopment() || swaggerOn)
 {
     app.UseSwagger();
