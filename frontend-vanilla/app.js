@@ -1,6 +1,7 @@
-// const API_URL = "http://localhost:5000/api/Producten"; // Voor lokaal testen (eventueel aan- of uitzetten)
+const API_URL = "http://localhost:5000/api/Producten"; // Voor lokaal testen
 let alleProducten = [];
 
+// Haalt producten op uit de API
 function laadProducten() {
     fetch(API_URL)
         .then(res => res.json())
@@ -13,6 +14,7 @@ function laadProducten() {
         });
 }
 
+// Toont de producten in de tabel
 function toonProducten(producten) {
     const tbody = document.getElementById('producten');
     if (!tbody) return;
@@ -27,6 +29,7 @@ function toonProducten(producten) {
 
         const tr = document.createElement('tr');
 
+        // Als het product wordt aangepast, toon invoervelden
         if (p.isEditing) {
             tr.innerHTML = `
                 <td><input type="text" id="edit-naam-${p.id}" value="${p.naam}"></td>
@@ -40,6 +43,7 @@ function toonProducten(producten) {
                 </td>
             `;
         } else {
+            // Normale weergave van product
             tr.innerHTML = `
                 <td>${p.naam}</td>
                 <td>${p.omschrijving}</td>
@@ -63,6 +67,7 @@ function toonProducten(producten) {
     });
 }
 
+// Filtert producten op beschikbaarheid
 function filterProducten() {
     const filterEl = document.getElementById('filter');
     if (!filterEl) return;
@@ -78,6 +83,7 @@ function filterProducten() {
     toonProducten(gefilterd);
 }
 
+// Zet een product in bewerkmodus
 function startAanpassen(id) {
     alleProducten = alleProducten.map(p => ({
         ...p,
@@ -86,6 +92,7 @@ function startAanpassen(id) {
     toonProducten(alleProducten);
 }
 
+// Annuleert het aanpassen van een product
 function annuleerAanpassing(id) {
     alleProducten = alleProducten.map(p => ({
         ...p,
@@ -94,6 +101,7 @@ function annuleerAanpassing(id) {
     toonProducten(alleProducten);
 }
 
+// Slaat de aanpassing van een product op via de API
 function opslaanAanpassing(id) {
     const naam = document.getElementById(`edit-naam-${id}`).value.trim();
     const omschrijving = document.getElementById(`edit-omschrijving-${id}`).value.trim();
@@ -126,6 +134,7 @@ function opslaanAanpassing(id) {
     .catch(() => toonMelding("Verbindingsfout.", "red"));
 }
 
+// Zet een product in of uit gebruik via de API
 function toggleInGebruik(id, inGebruik) {
     fetch(`${API_URL}/${id}/gebruik`, {
         method: 'PATCH',
@@ -145,6 +154,7 @@ function toggleInGebruik(id, inGebruik) {
     });
 }
 
+// Verwijdert een product via de API
 function verwijderProduct(id) {
     if (!confirm('Weet je zeker dat je dit product wilt verwijderen?')) return;
 
@@ -162,6 +172,7 @@ function verwijderProduct(id) {
     });
 }
 
+// Toont een melding aan de gebruiker
 function toonMelding(tekst, kleur) {
     const meldingEl = document.getElementById('melding');
     if (!meldingEl) return;
@@ -170,6 +181,7 @@ function toonMelding(tekst, kleur) {
     setTimeout(() => meldingEl.textContent = '', 3000);
 }
 
+// Voegt een nieuw product toe via de API
 function toevoegen(event) {
     event.preventDefault();
 
@@ -204,6 +216,7 @@ function toevoegen(event) {
     });
 }
 
+// Initialiseert de pagina: voegt event listeners toe en laadt producten
 function initBeschikbaarheidPagina() {
     const filterEl = document.getElementById('filter');
     if (filterEl) {
@@ -217,4 +230,5 @@ function initBeschikbaarheidPagina() {
     }
 }
 
+// Start de app als de pagina geladen is
 document.addEventListener('DOMContentLoaded', initBeschikbaarheidPagina);
