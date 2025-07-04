@@ -49,12 +49,12 @@ builder.Services.AddDbContext<ImplementatieDbContext>(opts =>
     )
 );
 
-// 4) your application services
+// 4) application services
 builder.Services.AddScoped<IGebruikRepository, GebruikRepository>();
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 
-// 5) controllers & swagger
+// 5) controllers & swagger niet vergeten
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -96,7 +96,7 @@ app.UseHttpsRedirection();
 // set up routing for middleware
 app.UseRouting();
 
-// your API-key check
+//  API-key check
 app.UseMiddleware<ApiKeyMiddleware>();
 
 // auth & controllers
