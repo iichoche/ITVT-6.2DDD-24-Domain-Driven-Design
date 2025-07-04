@@ -32,11 +32,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore ./BCImplementatie/BCImplementatie.csproj
+      - name: Restore all projects
+        run: dotnet restore ./BCImplementatie.sln
 
       - name: Build solution
-        run: dotnet build --no-restore ./BCImplementatie/BCImplementatie.csproj --configuration Release
+        run: dotnet build --no-restore ./BCImplementatie.sln --configuration Release
 
       - name: Run unit tests
         run: dotnet test ./BCImplementatie.Tests/BCImplementatie.Tests.csproj --no-build --verbosity normal
