@@ -33,7 +33,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore solution
-        run: dotnet restore BCImplementatie/BCImplementatie.sln \ --configfile nuget.config
+        run: dotnet restore BCImplementatie/BCImplementatie.sln
 
 
       - name: Build solution
