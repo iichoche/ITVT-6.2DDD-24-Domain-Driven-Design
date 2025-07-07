@@ -32,8 +32,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore all projects
-        run: dotnet restore BCImplementatie/BCImplementatie.sln
+      - name: Restore solution
+        run: dotnet restore BCImplementatie/BCImplementatie.sln \ --configfile nuget.config
+
 
       - name: Build solution
         run: dotnet build --no-restore BCImplementatie/BCImplementatie.sln --configuration Release
